@@ -5,7 +5,7 @@
     "Mark Striemer"
   ],
   "description": "Marketplace UI elements.",
-  "main": "dist/js/elements.js",
+  "main": "dist/js/marketplace-elements.js",
   "moduleType": [
     "amd"
   ],
