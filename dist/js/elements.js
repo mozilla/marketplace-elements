@@ -1,4 +1,4 @@
-define('components', ['document-register-element'], function () {
+define('marketplace-elements', [], function () {
     // Abstract element with attribute -> class mappings.
     var MktHTMLElement = function () {};
     MktHTMLElement.prototype = Object.create(HTMLElement.prototype, {
