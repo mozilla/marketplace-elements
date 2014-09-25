@@ -1,4 +1,7 @@
-default: js css
+default: clean js css
+
+clean:
+	rm -f dist/js/*.js dist/css/*.css
 
 js:
 	cp -f marketplace-elements.js dist/js/marketplace-elements.js
