@@ -23,3 +23,17 @@ The banner is used to show messages to users.
 |-----------|-------------|
 | success   | Make it green |
 | dismiss   | Configure dismissal. Values: `"on"` (default), `"off"`, `"remember"`. |
+
+Login
+-----
+
+A login link. This is pretty basic. It will add the "persona" class to a link.
+
+```html
+<mkt-login link>Login!</mkt-login>
+```
+
+### Configuration
+
+| attribute | description |
+| link      | Required. Link is the only supported type right now. |
