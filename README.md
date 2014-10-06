@@ -36,4 +36,5 @@ A login link. This is pretty basic. It will add the "persona" class to a link.
 ### Configuration
 
 | attribute | description |
+|-----------|-------------|
 | link      | Required. Link is the only supported type right now. |
