@@ -18,10 +18,8 @@ The banner is used to show messages to users.
 
 ### Configuration
 
-+-----------+-------------+
+
 | attribute | description |
-+-----------+-------------+
+|-----------|-------------|
 | success   | Make it green |
-+-----------+---------------+
 | dismiss   | Configure dismissal. Values: `"on"` (default), `"off"`, `"remember"`. |
-+-----------+---------------+
