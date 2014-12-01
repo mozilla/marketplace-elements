@@ -1,4 +1,7 @@
-define('marketplace-elements', [], function () {
+(function () {
+    // Mock gettext if it doesn't exist globally.
+    var gettext = window.gettext || function (str) { return str; };
+
     // Abstract element with attribute -> class mappings.
     var MktHTMLElement = function () {};
     MktHTMLElement.prototype = Object.create(HTMLElement.prototype, {
@@ -151,4 +154,9 @@ define('marketplace-elements', [], function () {
             },
         }),
     });
-});
+    // TODO: Make this do a proper check.
+    if (window.define !== undefined) {
+        define('marketplace-elements', [], function () {
+        });
+    }
+})();
