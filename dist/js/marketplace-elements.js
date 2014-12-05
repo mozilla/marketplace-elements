@@ -1,4 +1,11 @@
-define('marketplace-elements', [], function () {
+(function () {
+    // Mock gettext if it doesn't exist globally.
+    var gettext = window.gettext || function (str) { return str; };
+
+    function map(arr, fn) {
+        return Array.prototype.map.call(arr, fn);
+    }
+
     // Abstract element with attribute -> class mappings.
     var MktHTMLElement = function () {};
     MktHTMLElement.prototype = Object.create(HTMLElement.prototype, {
@@ -151,4 +158,58 @@ define('marketplace-elements', [], function () {
             },
         }),
     });
-});
+
+    var MktSegmented = document.registerElement('mkt-segmented', {
+        prototype: Object.create(MktHTMLElement.prototype, {
+            createdCallback: {
+                value: function () {
+                    var root = this;
+                    var select = this.querySelector('select');
+                    this.select = select;
+                    select.classList.add('mkt-segmented-select');
+                    this.classList.add('mkt-segmented');
+
+                    var buttons = map(select.options, function (option, i) {
+                        var button = document.createElement('button');
+                        button.index = i;
+                        button.classList.add('mkt-segmented-button');
+                        button.textContent = option.textContent;
+                        button.addEventListener('click', selectButton);
+                        return button;
+                    });
+
+                    var selected;
+                    // This call will set `selected`.
+                    selectButton.call(buttons[select.selectedIndex]);
+
+                    function selectButton() {
+                        if (selected == this) {
+                            return;
+                        } else if (selected) {
+                            selected.removeAttribute('selected');
+                        }
+                        this.setAttribute('selected', '');
+                        selected = this;
+                        select.selectedIndex = this.index;
+                        root.dispatchEvent(new Event('change'));
+                    }
+
+                    buttons.forEach(function (button) {
+                        root.appendChild(button);
+                    });
+                },
+            },
+            value: {
+                get: function () {
+                    return this.select.value;
+                },
+            }
+        }),
+    });
+
+    // TODO: Make this do a proper check.
+    if (window.define !== undefined) {
+        define('marketplace-elements', [], function () {
+        });
+    }
+})();

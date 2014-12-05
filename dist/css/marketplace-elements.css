@@ -67,6 +67,40 @@
 .mkt-banner-success a:hover {
   background-color: #0f8031;
 }
+.mkt-segmented-select {
+  display: none;
+}
+.mkt-segmented-button {
+  background: #fff;
+  border-color: #4cb1ff;
+  border-style: solid;
+  border-width: 1px 1px 1px 0;
+  color: #4cb1ff;
+  cursor: pointer;
+  padding: 10px;
+}
+.mkt-segmented-button:first-of-type {
+  border-radius: 5px 0 0 5px;
+  border-width: 1px;
+}
+.mkt-segmented-button:last-of-type {
+  border-radius: 0 5px 5px 0;
+}
+.mkt-segmented-button[selected] {
+  background: #4cb1ff;
+  border-color: #4cb1ff;
+  color: #fff;
+}
+.mkt-segmented-button:hover {
+  background: #42cafe;
+  border-color: #42cafe;
+  color: #fff;
+}
+.mkt-segmented-button:active {
+  background: #3d86bd;
+  border-color: #3d86bd;
+  color: #fff;
+}
 @media (min-width: 1025px) {
   .mkt-banner-content {
     padding: 0;
