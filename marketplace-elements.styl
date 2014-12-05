@@ -87,6 +87,49 @@
     }
 }
 
+.mkt-segmented-select {
+    display: none;
+}
+
+.mkt-segmented-button {
+    background: $white;
+    border-color: $primary-blue;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+    color: $primary-blue;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.mkt-segmented-button:first-of-type {
+    border-radius: 5px 0 0 5px;
+    border-width: 1px;
+}
+
+.mkt-segmented-button:last-of-type {
+    border-radius: 0 5px 5px 0;
+}
+
+.mkt-segmented-button {
+    &[selected] {
+        background: $primary-blue;
+        border-color: $primary-blue;
+        color: $white;
+    }
+
+    &:hover {
+        background: $primary-blue-light;
+        border-color: $primary-blue-light;
+        color: $white;
+    }
+
+    &:active {
+        background: $primary-blue-dark;
+        border-color: $primary-blue-dark;
+        color: $white;
+    }
+}
+
 @media (min-width: 1025px) {
     .mkt-banner-content {
         padding: 0;

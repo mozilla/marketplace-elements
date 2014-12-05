@@ -154,6 +154,51 @@
             },
         }),
     });
+
+    var MktSegmented = document.registerElement('mkt-segmented', {
+        prototype: Object.create(MktHTMLElement.prototype, {
+            createdCallback: {
+                value: function () {
+                    var root = this;
+                    var select = this.querySelector('select');
+                    this.select = select;
+                    select.classList.add('mkt-segmented-select');
+                    this.classList.add('mkt-segmented');
+
+                    var buttons = Array.prototype.map.call(select.options, function (option, index) {
+                        var button = document.createElement('button');
+                        button.index = index;
+                        button.classList.add('mkt-segmented-button');
+                        button.textContent = option.textContent;
+                        button.addEventListener('click', selectButton);
+                        return button;
+                    });
+
+                    var selected = buttons[select.selectedIndex];
+                    selectButton.call(selected);
+
+                    function selectButton() {
+                        if (selected) {
+                            selected.removeAttribute('selected');
+                        }
+                        this.setAttribute('selected', '');
+                        selected = this;
+                        select.selectedIndex = this.index;
+                    }
+
+                    buttons.forEach(function (button) {
+                        root.appendChild(button);
+                    });
+                },
+            },
+            value: {
+                get: function () {
+                    return this.select.value;
+                },
+            }
+        }),
+    });
+
     // TODO: Make this do a proper check.
     if (window.define !== undefined) {
         define('marketplace-elements', [], function () {
