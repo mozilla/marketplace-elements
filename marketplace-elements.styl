@@ -98,6 +98,7 @@
     border-width: 1px 1px 1px 0;
     color: $primary-blue;
     cursor: pointer;
+    outline: none;
     padding: 10px;
 
     &:first-of-type {
@@ -133,12 +134,14 @@
 }
 
 .mkt-tab-control-button {
+    background: transparent;
     border-color: transparent;
     border-style: solid;
     border-width: 0 0 3px 0;
     color: $black;
     cursor: pointer;
     margin: 0 5px;
+    outline: none;
     padding: 5px 0;
     text-transform: uppercase;
 
@@ -155,6 +158,16 @@
     &:active {
         border-color: $primary-blue-dark;
         color: $primary-blue-dark;
+    }
+}
+
+.mkt-tabs {
+    .mkt-tab {
+        display: none;
+
+        &.mkt-tab-active {
+            display: block;
+        }
     }
 }
 
