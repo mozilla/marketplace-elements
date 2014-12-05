@@ -2,6 +2,10 @@
     // Mock gettext if it doesn't exist globally.
     var gettext = window.gettext || function (str) { return str; };
 
+    function map(arr, fn) {
+        return Array.prototype.map.call(arr, fn);
+    }
+
     // Abstract element with attribute -> class mappings.
     var MktHTMLElement = function () {};
     MktHTMLElement.prototype = Object.create(HTMLElement.prototype, {
@@ -165,25 +169,29 @@
                     select.classList.add('mkt-segmented-select');
                     this.classList.add('mkt-segmented');
 
-                    var buttons = Array.prototype.map.call(select.options, function (option, index) {
+                    var buttons = map(select.options, function (option, i) {
                         var button = document.createElement('button');
-                        button.index = index;
+                        button.index = i;
                         button.classList.add('mkt-segmented-button');
                         button.textContent = option.textContent;
                         button.addEventListener('click', selectButton);
                         return button;
                     });
 
-                    var selected = buttons[select.selectedIndex];
-                    selectButton.call(selected);
+                    var selected;
+                    // This call will set `selected`.
+                    selectButton.call(buttons[select.selectedIndex]);
 
                     function selectButton() {
-                        if (selected) {
+                        if (selected == this) {
+                            return;
+                        } else if (selected) {
                             selected.removeAttribute('selected');
                         }
                         this.setAttribute('selected', '');
                         selected = this;
                         select.selectedIndex = this.index;
+                        root.dispatchEvent(new Event('change'));
                     }
 
                     buttons.forEach(function (button) {
