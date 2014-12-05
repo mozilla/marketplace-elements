@@ -24,6 +24,25 @@ The banner is used to show messages to users.
 | success   | Make it green |
 | dismiss   | Configure dismissal. Values: `"on"` (default), `"off"`, `"remember"`. |
 
+Segmented
+---------
+
+The segmented control acts like a select but provides a horizontal layout.
+
+```html
+<mkt-segmented>
+    <select>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3" selected>Three</option>
+    </select>
+</mkt-segmented>
+```
+
+```js
+document.querySelector('mkt-segmented').value;  // "3"
+```
+
 Login
 -----
 
