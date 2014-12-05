@@ -99,18 +99,16 @@
     color: $primary-blue;
     cursor: pointer;
     padding: 10px;
-}
 
-.mkt-segmented-button:first-of-type {
-    border-radius: 5px 0 0 5px;
-    border-width: 1px;
-}
+    &:first-of-type {
+        border-radius: 5px 0 0 5px;
+        border-width: 1px;
+    }
 
-.mkt-segmented-button:last-of-type {
-    border-radius: 0 5px 5px 0;
-}
+    &:last-of-type {
+        border-radius: 0 5px 5px 0;
+    }
 
-.mkt-segmented-button {
     &[selected] {
         background: $primary-blue;
         border-color: $primary-blue;
@@ -127,6 +125,36 @@
         background: $primary-blue-dark;
         border-color: $primary-blue-dark;
         color: $white;
+    }
+}
+
+.mkt-tab-control-select {
+    display: none;
+}
+
+.mkt-tab-control-button {
+    border-color: transparent;
+    border-style: solid;
+    border-width: 0 0 3px 0;
+    color: $black;
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 5px 0;
+    text-transform: uppercase;
+
+    &[selected] {
+        border-color: $primary-blue;
+        color: $primary-blue;
+    }
+
+    &:hover {
+        border-color: $primary-blue-light;
+        color: $primary-blue-light;
+    }
+
+    &:active {
+        border-color: $primary-blue-dark;
+        color: $primary-blue-dark;
     }
 }
 

@@ -207,6 +207,54 @@
         }),
     });
 
+    var MktTabControl = document.registerElement('mkt-tab-control', {
+        prototype: Object.create(MktHTMLElement.prototype, {
+            createdCallback: {
+                value: function () {
+                    var root = this;
+                    var select = this.querySelector('select');
+                    this.select = select;
+                    select.classList.add('mkt-tab-control-select');
+                    this.classList.add('mkt-tab-control');
+
+                    var buttons = map(select.options, function (option, i) {
+                        var button = document.createElement('button');
+                        button.index = i;
+                        button.classList.add('mkt-tab-control-button');
+                        button.textContent = option.textContent;
+                        button.addEventListener('click', selectButton);
+                        return button;
+                    });
+
+                    var selected;
+                    // This call will set `selected`.
+                    selectButton.call(buttons[select.selectedIndex]);
+
+                    function selectButton() {
+                        if (selected == this) {
+                            return;
+                        } else if (selected) {
+                            selected.removeAttribute('selected');
+                        }
+                        this.setAttribute('selected', '');
+                        selected = this;
+                        select.selectedIndex = this.index;
+                        root.dispatchEvent(new Event('change'));
+                    }
+
+                    buttons.forEach(function (button) {
+                        root.appendChild(button);
+                    });
+                },
+            },
+            value: {
+                get: function () {
+                    return this.select.value;
+                },
+            }
+        }),
+    });
+
     // TODO: Make this do a proper check.
     if (window.define !== undefined) {
         define('marketplace-elements', [], function () {
