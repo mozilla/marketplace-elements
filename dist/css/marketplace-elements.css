@@ -77,6 +77,7 @@
   border-width: 1px 1px 1px 0;
   color: #4cb1ff;
   cursor: pointer;
+  outline: none;
   padding: 10px;
 }
 .mkt-segmented-button:first-of-type {
@@ -105,12 +106,14 @@
   display: none;
 }
 .mkt-tab-control-button {
+  background: transparent;
   border-color: transparent;
   border-style: solid;
   border-width: 0 0 3px 0;
   color: #000;
   cursor: pointer;
   margin: 0 5px;
+  outline: none;
   padding: 5px 0;
   text-transform: uppercase;
 }
@@ -125,6 +128,12 @@
 .mkt-tab-control-button:active {
   border-color: #3d86bd;
   color: #3d86bd;
+}
+.mkt-tabs .mkt-tab {
+  display: none;
+}
+.mkt-tabs .mkt-tab.mkt-tab-active {
+  display: block;
 }
 @media (min-width: 1025px) {
   .mkt-banner-content {

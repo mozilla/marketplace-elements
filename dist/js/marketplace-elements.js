@@ -2,6 +2,18 @@
     // Mock gettext if it doesn't exist globally.
     var gettext = window.gettext || function (str) { return str; };
 
+    function forEach(arr, fn) {
+        return Array.prototype.forEach.call(arr, fn);
+    }
+
+    function find(array, predicate) {
+        for (var i = 0, n = array.length; i < n; i++) {
+            if (predicate(array[i])) {
+                return array[i];
+            }
+        }
+    }
+
     function map(arr, fn) {
         return Array.prototype.map.call(arr, fn);
     }
@@ -226,9 +238,22 @@
                         return button;
                     });
 
+                    // Set the currently selected option.
                     var selected;
                     // This call will set `selected`.
                     selectButton.call(buttons[select.selectedIndex]);
+
+                    // Hook this up to a <mkt-tabs> if `control` is set.
+                    var controlledTabsId = root.getAttribute('control');
+                    var controlledTabs;
+                    if (controlledTabsId) {
+                        controlledTabs = document.getElementById(controlledTabsId);
+                        controlledTabs.controller = root.id;
+                        controlledTabs.setAttribute('current', root.value);
+                        root.addEventListener('change', function () {
+                            controlledTabs.setAttribute('current', root.value);
+                        });
+                    }
 
                     function selectButton() {
                         if (selected == this) {
@@ -252,6 +277,45 @@
                     return this.select.value;
                 },
             }
+        }),
+    });
+
+    var MktTabs = document.registerElement('mkt-tabs', {
+        prototype: Object.create(MktHTMLElement.prototype, {
+            createdCallback: {
+                value: function () {
+                    var root = this;
+                    var tabs = root.querySelectorAll('section');
+                    root.tabs = tabs;
+                    var current = root.getAttribute('current');
+
+                    root.classList.add('mkt-tabs');
+                    forEach(tabs, function (tab) {
+                        tab.classList.add('mkt-tab');
+                        if (tab.getAttribute('name') == current) {
+                            tab.classList.add('mkt-tab-active');
+                        }
+                    });
+                },
+            },
+            attributeChangedCallback: {
+                value: function (name, oldValue, newValue) {
+                    var root = this;
+                    function findTab(name) {
+                        return find(root.tabs, function (tab) {
+                            return tab.getAttribute('name') == name;
+                        });
+                    }
+                    if (name == 'current') {
+                        if (oldValue) {
+                            findTab(oldValue).classList.remove('mkt-tab-active');
+                        }
+                        if (newValue) {
+                            findTab(newValue).classList.add('mkt-tab-active');
+                        }
+                    }
+                },
+            },
         }),
     });
 
