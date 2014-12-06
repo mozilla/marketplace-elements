@@ -5,7 +5,7 @@ clean:
 
 js:
 	cp -f marketplace-elements.js dist/js/marketplace-elements.js
-	cp -f document-register-element.js dist/js/document-register-element.js
+	cp -f bower_components/document-register-element/build/document-register-element.js dist/js/document-register-element.js
 
 css:
 	stylus marketplace-elements.styl marketplace-elements-self.styl -o dist/css
