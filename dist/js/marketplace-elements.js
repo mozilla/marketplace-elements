@@ -312,6 +312,7 @@
                         }
                         if (newValue) {
                             findTab(newValue).classList.add('mkt-tab-active');
+                            root.dispatchEvent(new Event('change'));
                         }
                     }
                 },
