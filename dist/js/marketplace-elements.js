@@ -318,10 +318,4 @@
             },
         }),
     });
-
-    // TODO: Make this do a proper check.
-    if (window.define !== undefined) {
-        define('marketplace-elements', [], function () {
-        });
-    }
 })();
