@@ -1,0 +1,14 @@
+body {
+  font-family: "Fira Sans OT", "Fira Sans", FiraSansWeb, sans-serif;
+  background: #eee;
+}
+.page {
+  margin: 0 auto;
+  width: 800px;
+}
+.page > mkt-banner {
+  margin-bottom: 20px;
+}
+.mkt-tab {
+  padding-top: 20px;
+}
