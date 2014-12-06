@@ -1,15 +1,8 @@
 {
-  "name": "marketplace-elements",
-  "version": "0.1.0",
   "authors": [
     "Mark Striemer"
   ],
   "description": "Marketplace UI elements.",
-  "main": "dist/js/marketplace-elements.js",
-  "moduleType": [
-    "amd"
-  ],
-  "license": "MPL",
   "homepage": "https://github.com/mozilla/marketplace-elements",
   "ignore": [
     "**/.*",
@@ -17,5 +10,12 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "license": "MPL",
+  "main": "dist/js/marketplace-elements.js",
+  "moduleType": [
+    "amd"
+  ],
+  "name": "marketplace-elements",
+  "version": "v0.1.1"
 }
