@@ -8,9 +8,9 @@
     background: $dark-gray;
     color: $white;
     display: block;
+    line-height: 1.3;
     overflow: hidden;
     position: relative;
-    line-height: 1.3;
 }
 
 .mkt-banner-content {
@@ -20,8 +20,13 @@
     text-align: center;
 
     .close {
-        margin-top: -17px;
+        margin: -17px 0 0 0;
         top: 50%;
+    }
+
+    .close,
+    .close:hover {
+        background-color: transparent;
     }
 
     span {
@@ -30,7 +35,6 @@
         padding: 0;
     }
 
-
     a {
         border-radius: 5px;
         color: #fff;
@@ -38,6 +42,20 @@
         margin: 10px;
         padding: 10px;
         text-decoration: none;
+
+        &.spin {
+            color: transparent;
+            position: relative;
+
+            &:after {
+                spinner('install');
+                content: "";
+                display: block;
+                left: unquote('calc(50% - 9px)');
+                position: absolute;
+                top: unquote('calc(50% - 11px)');
+            }
+        }
     }
 }
 
@@ -57,11 +75,6 @@
             background-color: darken($darker-gray, 10%);
         }
     }
-
-    .close,
-    .close:hover {
-        background-color: transparent;
-    }
 }
 
 .mkt-banner-success {
@@ -70,7 +83,7 @@
     .mkt-banner-content {
         font-size: 15px;
         font-weight: 500;
-        padding: 0 10px;
+        padding: 0 40px;
     }
 
     small {
