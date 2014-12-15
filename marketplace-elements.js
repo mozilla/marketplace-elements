@@ -100,7 +100,7 @@
                         var closeButton = document.createElement('a');
                         closeButton.classList.add('close');
                         closeButton.href = '#';
-                        closeButton.textContent = gettext('Close');
+                        closeButton.textContent = '';
                         closeButton.title = gettext('Close');
                         closeButton.addEventListener('click', function (e) {
                             e.preventDefault();
