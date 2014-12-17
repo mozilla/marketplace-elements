@@ -1,7 +1,12 @@
 marketplace-elements
 ====================
 
-Web component base UI elements for Firefox Marketplace.
+Web component UI elements for Firefox Marketplace.
+
+To develop:
+
+    make
+    python -m SimpleHTTPServer
 
 Banner
 ------
