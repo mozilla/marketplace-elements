@@ -1,11 +1,13 @@
-default: clean js css
+default: js css
 
-clean:
-	rm -f dist/js/*.js dist/css/*.css
+install:
+	bower install
 
 js:
 	cp -f marketplace-elements.js dist/js/marketplace-elements.js
-	cp -f bower_components/document-register-element/build/document-register-element.js dist/js/document-register-element.js
 
 css:
-	stylus marketplace-elements.styl marketplace-elements-self.styl -o dist/css
+	stylus marketplace-elements.styl -o dist/css
+
+serve:
+	python -m SimpleHTTPServer

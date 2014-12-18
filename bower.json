@@ -1,9 +1,7 @@
 {
-  "authors": [
-    "Mark Striemer"
-  ],
-  "description": "Marketplace UI elements.",
-  "homepage": "https://github.com/mozilla/marketplace-elements",
+  "authors": ["Mozilla", "Mark Striemer"],
+  "name": "marketplace-elements",
+  "version": "v0.1.3",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -11,14 +9,15 @@
     "test",
     "tests"
   ],
+  "dependencies": {
+    "document-register-element": "~0.1.6",
+    "marketplace-frontend": "7.1.1"
+  },
+  "description": "Web component UI elements for the Firefox Marketplace",
+  "homepage": "https://github.com/mozilla/marketplace-elements",
   "license": "MPL",
   "main": "dist/js/marketplace-elements.js",
   "moduleType": [
     "amd"
-  ],
-  "name": "marketplace-elements",
-  "version": "v0.1.3",
-  "dependencies": {
-    "document-register-element": "~0.1.6"
-  }
+  ]
 }

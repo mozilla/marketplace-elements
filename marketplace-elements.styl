@@ -1,4 +1,4 @@
-@import 'lib';
+@import 'bower_components/marketplace-frontend/src/media/css/lib';
 
 .mkt-cloak {
     display: none;
@@ -78,7 +78,7 @@
 }
 
 .mkt-banner-success {
-    background: $primary-green;
+    background: $action-success;
 
     .mkt-banner-content {
         font-size: 15px;
@@ -106,10 +106,10 @@
 
 .mkt-segmented-button {
     background: $white;
-    border-color: $primary-blue;
+    border-color: $action-positive;
     border-style: solid;
     border-width: 1px 1px 1px 0;
-    color: $primary-blue;
+    color: $action-positive;
     cursor: pointer;
     outline: none;
     padding: 10px;
@@ -124,20 +124,20 @@
     }
 
     &[selected] {
-        background: $primary-blue;
-        border-color: $primary-blue;
+        background: $action-positive;
+        border-color: $action-positive;
         color: $white;
     }
 
     &:hover {
-        background: $primary-blue-light;
-        border-color: $primary-blue-light;
+        background: $action-positive-hover;
+        border-color: $action-positive-hover;
         color: $white;
     }
 
     &:active {
-        background: $primary-blue-dark;
-        border-color: $primary-blue-dark;
+        background: $action-positive-tapped;
+        border-color: $action-positive-tapped;
         color: $white;
     }
 }
@@ -159,18 +159,18 @@
     text-transform: uppercase;
 
     &[selected] {
-        border-color: $primary-blue;
-        color: $primary-blue;
+        border-color: $action-positive;
+        color: $action-positive;
     }
 
     &:hover {
-        border-color: $primary-blue-light;
-        color: $primary-blue-light;
+        border-color: $action-positive-hover;
+        color: $action-positive-hover;
     }
 
     &:active {
-        border-color: $primary-blue-dark;
-        color: $primary-blue-dark;
+        border-color: $action-positive-tapped;
+        color: $action-positive-tapped;
     }
 }
 

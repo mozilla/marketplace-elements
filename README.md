@@ -3,10 +3,9 @@ marketplace-elements
 
 Web component UI elements for Firefox Marketplace.
 
-To develop:
-
+    make install
     make
-    python -m SimpleHTTPServer
+    make serve
 
 Banner
 ------

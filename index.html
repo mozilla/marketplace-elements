@@ -1,47 +1,47 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Marketplace Elements</title>
-        <link rel="stylesheet" href="dist/css/marketplace-elements.css">
-        <link rel="stylesheet" href="dist/css/marketplace-elements-self.css">
-        <script src="dist/js/document-register-element.js"></script>
-        <script src="dist/js/marketplace-elements.js"></script>
-    </head>
-    <body>
-        <div class="page">
-            <mkt-tab-control control="element-tabs" id="elements-tab-control">
-                <select>
-                    <option value="mkt-banner">Banner</option>
-                    <option value="mkt-segmented">Segmented</option>
-                    <option value="mkt-tab-control">Tab Control</option>
-                </select>
-            </mkt-tab-control>
+  <head>
+    <title>Marketplace Elements</title>
+    <link rel="stylesheet" href="page.css">
+    <link rel="stylesheet" href="dist/css/marketplace-elements.css">
+    <script src="bower_components/document-register-element/build/document-register-element.js"></script>
+    <script src="dist/js/marketplace-elements.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <mkt-tab-control control="element-tabs" id="elements-tab-control">
+        <select>
+          <option value="mkt-banner">Banner</option>
+          <option value="mkt-segmented">Segmented</option>
+          <option value="mkt-tab-control">Tab Control</option>
+        </select>
+      </mkt-tab-control>
 
-            <mkt-tabs id="element-tabs">
-                <section name="mkt-banner">
-                    <mkt-banner success dismiss="off">Marketplace Elements
-                        <a href="https://github.com/mozilla/marketplace-elements">Code on GitHub</a>
-                    </mkt-banner>
-                </section>
-                <section name="mkt-segmented">
-                    <mkt-segmented>
-                        <select>
-                            <option value="en">English</option>
-                            <option value="wat">Whatever</option>
-                            <option value="all" selected>All languages</option>
-                        </select>
-                    </mkt-segmented>
-                </section>
-                <section name="mkt-tab-control">
-                    <mkt-tab-control>
-                        <select>
-                            <option value="en">English</option>
-                            <option value="wat">Whatever</option>
-                            <option value="all" selected>All languages</option>
-                        </select>
-                    </mkt-tab-control>
-                </section>
-            </mkt-tabs>
-        </div>
-    </body>
+      <mkt-tabs id="element-tabs">
+        <section name="mkt-banner">
+          <mkt-banner success dismiss="off">Marketplace Elements
+            <a href="https://github.com/mozilla/marketplace-elements">Code on GitHub</a>
+          </mkt-banner>
+        </section>
+        <section name="mkt-segmented">
+          <mkt-segmented>
+            <select>
+              <option value="en">English</option>
+              <option value="wat">Whatever</option>
+              <option value="all" selected>All languages</option>
+            </select>
+          </mkt-segmented>
+        </section>
+        <section name="mkt-tab-control">
+          <mkt-tab-control>
+            <select>
+              <option value="en">English</option>
+              <option value="wat">Whatever</option>
+              <option value="all" selected>All languages</option>
+            </select>
+          </mkt-tab-control>
+        </section>
+      </mkt-tabs>
+    </div>
+  </body>
 </html>
