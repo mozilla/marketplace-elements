@@ -195,3 +195,91 @@
         display: none;
     }
 }
+
+.mkt-prompt {
+    background: alpha($greyscale-grey, .8);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;  // TODO: write a z-index system.
+
+    section {
+        background: $white;
+        border-radius: 1px
+        position: absolute;
+        left: 0;
+        margin: 5% auto 0;
+        max-width: ($max-site-width / 2)px;
+        right: 0;
+        width: 90%;
+    }
+    section > form:first-child,
+    section > div:first-child {
+        padding: 5px 20px;
+    }
+    form > div:not(:last-child) {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    h3 {
+        font-weight: 500;
+    }
+    p {
+        font-size: $font-size;
+        line-height: 22px;
+    }
+    textarea {
+        border: 1px solid $greyscale-light-grey;
+        font-family: $primary-font-family;
+        margin-bottom: 20px;
+        min-height: 100px;
+        padding: 10px;
+        width: unquote('calc(100% - 20px)');
+    }
+    select {
+        width: 100%;
+    }
+    div > button {
+        border: 0;
+        color: $white;
+        font-size: 13px;
+        font-weight: 400;
+        height: 48px;
+        width: 50%;
+        position: absolute;
+
+        &:hover {
+            cursor: pointer;
+        }
+        &:first-child {
+            background: $action-error;
+            left: 0;
+
+            &:hover {
+                background: $action-error-hover;
+            }
+            &:active {
+                background: $action-error-tapped;
+            }
+        }
+        &:last-child {
+            background: $action-success;
+            right: 0;
+
+            &:hover {
+                background: $action-success-hover;
+            }
+            &:active {
+                background: $action-success-tapped;
+            }
+        }
+    }
+}
+
+@media $base-tablet {
+    .mkt-prompt section {
+        width: (100 / 3 * 2)%;
+    }
+}
