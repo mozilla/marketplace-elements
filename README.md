@@ -7,6 +7,8 @@ Web component UI elements for Firefox Marketplace.
     make
     make serve
 
+[View Demo](http://mozilla.github.io/marketplace-elements/)
+
 Banner
 ------
 
