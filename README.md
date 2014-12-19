@@ -75,11 +75,11 @@ A prompt modal with a cancel button and a submit button. Supports forms.
   <form>
     <p>What is your name?</p>
     <textarea name="name"></textarea>
+    <div>
+      <button>Cancel</button>
+      <button>Submit</button>
+    </div>
   </form>
-  <div>
-    <button>Cancel</button>
-    <button>Submit</button>
-  </div>
 </mkt-prompt>
 ```
 
