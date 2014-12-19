@@ -63,3 +63,28 @@ A login link. This is pretty basic. It will add the "persona" class to a link.
 | attribute | description |
 |-----------|-------------|
 | link      | Required. Link is the only supported type right now. |
+
+
+Prompt
+------
+
+A prompt modal with a cancel button and a submit button. Supports forms.
+
+```html
+<mkt-prompt>
+  <form>
+    <p>What is your name?</p>
+    <textarea name="name"></textarea>
+  </form>
+  <div>
+    <button>Cancel</button>
+    <button>Submit</button>
+  </div>
+</mkt-prompt>
+```
+
+The prompt modal fires two events:
+
+- **mkt-prompt-cancel** - fired when the cancel button is clicked
+- **mkt-prompt-submit** - fired when the submit button is clicked.
+  Passes the serialized form data in the event's details.

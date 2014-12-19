@@ -11,7 +11,7 @@
 }
 .mkt-banner-content {
   margin: 2px auto;
-  max-width: 1024px;
+  max-width: 1070px;
   position: relative;
   text-align: center;
 }
@@ -164,5 +164,87 @@
 @media (max-width: 709px) {
   .mkt-banner small {
     display: none;
+  }
+}
+.mkt-prompt {
+  background: rgba(203,203,203,0.8);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.mkt-prompt section {
+  background: #fff;
+  border-radius: 1px;
+  position: absolute;
+  left: 0;
+  margin: 5% auto 0;
+  max-width: 535px;
+  right: 0;
+  width: 90%;
+}
+.mkt-prompt section > form:first-child,
+.mkt-prompt section > div:first-child {
+  padding: 5px 20px;
+}
+.mkt-prompt form > div:not(:last-child) {
+  margin-bottom: 20px;
+  width: 100%;
+}
+.mkt-prompt h3 {
+  font-weight: 500;
+}
+.mkt-prompt p {
+  font-size: $font-size;
+  line-height: 22px;
+}
+.mkt-prompt textarea {
+  border: 1px solid #f1f1f1;
+  font-family: "Fira Sans OT", "Fira Sans", FiraSansWeb, sans-serif;
+  margin-bottom: 20px;
+  min-height: 100px;
+  padding: 10px;
+  width: calc(100% - 20px);
+}
+.mkt-prompt select {
+  width: 100%;
+}
+.mkt-prompt div > button {
+  border: 0;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 400;
+  height: 48px;
+  width: 50%;
+  position: absolute;
+}
+.mkt-prompt div > button:hover {
+  cursor: pointer;
+}
+.mkt-prompt div > button:first-child {
+  background: #f54b3c;
+  left: 0;
+}
+.mkt-prompt div > button:first-child:hover {
+  background: #ff6c70;
+}
+.mkt-prompt div > button:first-child:active {
+  background: #b63932;
+}
+.mkt-prompt div > button:last-child {
+  background: #64be3c;
+  right: 0;
+}
+.mkt-prompt div > button:last-child:hover {
+  background: #66d071;
+}
+.mkt-prompt div > button:last-child:active {
+  background: #4d8d32;
+}
+@media (min-width: 700px) {
+  .mkt-prompt section {
+    width: 66.66666666666667%;
   }
 }

@@ -1,22 +1,20 @@
 (function () {
+    (function () {
+        // IE Custom Event polyfill.
+        if (typeof window.CustomEvent === undefined) {
+            var CustomEvent = function(event, params) {
+                params = params || {bubbles: false, cancelable: false, detail: undefined};
+                var evt = document.createEvent('CustomEvent');
+                evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+                return evt;
+            };
+            CustomEvent.prototype = window.Event.prototype;
+            window.CustomEvent = CustomEvent;
+        }
+    })();
+
     // Mock gettext if it doesn't exist globally.
     var gettext = window.gettext || function (str) { return str; };
-
-    function forEach(arr, fn) {
-        return Array.prototype.forEach.call(arr, fn);
-    }
-
-    function find(array, predicate) {
-        for (var i = 0, n = array.length; i < n; i++) {
-            if (predicate(array[i])) {
-                return array[i];
-            }
-        }
-    }
-
-    function map(arr, fn) {
-        return Array.prototype.map.call(arr, fn);
-    }
 
     // Abstract element with attribute -> class mappings.
     var MktHTMLElement = function () {};
@@ -40,7 +38,7 @@
         createdCallback: {
             value: function () {
                 var self = this;
-                Object.keys(this.attributeClasses).forEach(function (attr) {
+                forEach(Object.keys(this.attributeClasses), function (attr) {
                     var className = self.attributeClasses[attr];
                     if (self.hasAttribute(attr) && className) {
                         self.classList.add(className);
@@ -62,7 +60,7 @@
         },
     });
 
-    var MktBanner = document.registerElement('mkt-banner', {
+    document.registerElement('mkt-banner', {
         prototype: Object.create(MktHTMLElement.prototype, {
             attributeClasses: {
                 value: {
@@ -149,7 +147,7 @@
         }),
     });
 
-    var MktLogin = document.registerElement('mkt-login', {
+    document.registerElement('mkt-login', {
         prototype: Object.create(MktHTMLElement.prototype, {
             createdCallback: {
                 value: function () {
@@ -171,7 +169,7 @@
         }),
     });
 
-    var MktSegmented = document.registerElement('mkt-segmented', {
+    document.registerElement('mkt-segmented', {
         prototype: Object.create(MktHTMLElement.prototype, {
             createdCallback: {
                 value: function () {
@@ -181,7 +179,7 @@
                     select.classList.add('mkt-segmented-select');
                     this.classList.add('mkt-segmented');
 
-                    var buttons = map(select.options, function (option, i) {
+                    var buttons = map(select.options, function(option, i) {
                         var button = document.createElement('button');
                         button.index = i;
                         button.classList.add('mkt-segmented-button');
@@ -206,7 +204,7 @@
                         root.dispatchEvent(new Event('change'));
                     }
 
-                    buttons.forEach(function (button) {
+                    buttons.forEach(function(button) {
                         root.appendChild(button);
                     });
                 },
@@ -219,7 +217,7 @@
         }),
     });
 
-    var MktTabControl = document.registerElement('mkt-tab-control', {
+    document.registerElement('mkt-tab-control', {
         prototype: Object.create(MktHTMLElement.prototype, {
             createdCallback: {
                 value: function () {
@@ -267,7 +265,7 @@
                         root.dispatchEvent(new Event('change'));
                     }
 
-                    buttons.forEach(function (button) {
+                    buttons.forEach(function(button) {
                         root.appendChild(button);
                     });
                 },
@@ -280,17 +278,22 @@
         }),
     });
 
-    var MktTabs = document.registerElement('mkt-tabs', {
+    document.registerElement('mkt-tabs', {
         prototype: Object.create(MktHTMLElement.prototype, {
             createdCallback: {
                 value: function () {
                     var root = this;
-                    var tabs = root.querySelectorAll('section');
+                    var tabs = filter(root.querySelectorAll('section'), function(section) {
+                        // Only select immediate sections.
+                        return section.parentNode === root;
+
+                    });
+
                     root.tabs = tabs;
                     var current = root.getAttribute('current');
 
                     root.classList.add('mkt-tabs');
-                    forEach(tabs, function (tab) {
+                    forEach(tabs, function(tab) {
                         tab.classList.add('mkt-tab');
                         if (tab.getAttribute('name') == current) {
                             tab.classList.add('mkt-tab-active');
@@ -319,4 +322,73 @@
             },
         }),
     });
+
+    document.registerElement('mkt-prompt', {
+        prototype: Object.create(MktHTMLElement.prototype, {
+            createdCallback: {
+                value: function() {
+                    var self = this;
+                    self.classList.add('mkt-prompt');
+
+                    var cancelButton = self.querySelector('div:last-child button:first-child');
+                    cancelButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        self.dispatchEvent(new CustomEvent('mkt-prompt-cancel'));
+                        self.dismissModal();
+                    });
+
+                    var submitButton = self.querySelector('div:last-child button:last-child');
+                    submitButton.type = 'submit';
+                    self.querySelector('form').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        var detail = {
+                            detail: serialize(self.querySelector('form'))
+                        };
+                        self.dispatchEvent(new CustomEvent('mkt-prompt-submit', detail));
+                        self.dismissModal();
+                    });
+                },
+            },
+            dismissModal: {
+                // Remove the modal from the page.
+                value: function() {
+                    this.parentNode.removeChild(this);
+                }
+            },
+        }),
+    });
+
+    function forEach(arr, fn) {
+        // For NodeList.
+        return Array.prototype.forEach.call(arr, fn);
+    }
+
+    function find(arr, predicate) {
+        // For NodeList.
+        for (var i = 0, n = arr.length; i < n; i++) {
+            if (predicate(arr[i])) {
+                return arr[i];
+            }
+        }
+    }
+
+    function map(arr, fn) {
+        // For NodeList.
+        return Array.prototype.map.call(arr, fn);
+    }
+
+    function filter(arr, fn) {
+        // For NodeList.
+        return Array.prototype.filter.call(arr, fn);
+    }
+
+    function serialize(form) {
+        var data = {};
+        forEach(form.elements, function(ele) {
+            if (!ele.disabled && ele.name) {
+                data[ele.name] = ele.value;
+            }
+        });
+        return data;
+    }
 })();
