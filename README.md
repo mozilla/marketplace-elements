@@ -68,7 +68,10 @@ A login link. This is pretty basic. It will add the "persona" class to a link.
 Prompt
 ------
 
-A prompt modal with a cancel button and a submit button. Supports forms.
+A form that can take the form of a page or as a modal. As a page, just
+has a submit button. As a modal, has a cancel and submit button.
+
+As a page:
 
 ```html
 <mkt-prompt>
@@ -81,6 +84,13 @@ A prompt modal with a cancel button and a submit button. Supports forms.
     </div>
   </form>
 </mkt-prompt>
+```
+
+As a modal:
+
+```
+<mkt-prompt data-modal>
+...
 ```
 
 The prompt modal fires two events:

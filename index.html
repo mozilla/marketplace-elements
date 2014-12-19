@@ -2,6 +2,9 @@
 <html>
   <head>
     <title>Marketplace Elements</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
     <link rel="stylesheet" href="bower_components/marketplace-frontend/src/media/css/typography.css">
     <link rel="stylesheet" href="bower_components/marketplace-frontend/src/media/css/pretty-select.css">
 
@@ -77,8 +80,8 @@
 </pre>
         </section>
 
-        <!--Prompt-->
         <section name="mkt-prompt">
+          <!--Prompt (as a page)-->
           <mkt-prompt>
             <section>
               <form>
@@ -113,6 +116,24 @@
    &lt;/section&gt;
  &lt;/mkt-prompt&gt;
 </pre>
+
+          <!--Prompt (as a modal)-->
+          <mkt-prompt data-modal>
+            <section>
+              <form>
+                <h3>Do you want to build a snowman?</h3>
+                <p>Come on let's go and play. I never see you anymore.</p>
+                <div class="pretty-select"><select>
+                  <option>It doesn't have to be a snowman</option>
+                </select></div>
+                <textarea name="snowman" placeholder="Come out the door."></textarea>
+                <div>
+                  <button>Nah</button>
+                  <button>Yah</button>
+                </div>
+              </form>
+            </section>
+          </mkt-prompt>
         </section>
       </mkt-tabs>
     </div>

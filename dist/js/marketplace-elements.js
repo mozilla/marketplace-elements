@@ -1,16 +1,13 @@
 (function () {
+    var CustomEvent;
     (function () {
         // IE Custom Event polyfill.
-        if (typeof window.CustomEvent === undefined) {
-            var CustomEvent = function(event, params) {
-                params = params || {bubbles: false, cancelable: false, detail: undefined};
-                var evt = document.createEvent('CustomEvent');
-                evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
-                return evt;
-            };
-            CustomEvent.prototype = window.Event.prototype;
-            window.CustomEvent = CustomEvent;
-        }
+        CustomEvent = function(event, bubbles, cancelable, detail) {
+            var evt = document.createEvent('CustomEvent');
+            evt.initCustomEvent(event, bubbles, cancelable, detail);
+            return evt;
+        };
+        CustomEvent.prototype = window.Event.prototype;
     })();
 
     // Mock gettext if it doesn't exist globally.
@@ -328,31 +325,47 @@
             createdCallback: {
                 value: function() {
                     var self = this;
+                    self.isModal = self.hasAttribute('data-modal');
                     self.classList.add('mkt-prompt');
 
-                    var cancelButton = self.querySelector('div:last-child button:first-child');
-                    cancelButton.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        self.dispatchEvent(new CustomEvent('mkt-prompt-cancel'));
-                        self.dismissModal();
-                    });
+                    if (self.isModal) {
+                        // Dismiss if click outside of the modal.
+                        self.addEventListener('click', function(e) {
+                            if (e.target === self) {
+                                self.dismissModal();
+                            }
+                        });
 
-                    var submitButton = self.querySelector('div:last-child button:last-child');
+                        // Cancel button closes modal.
+                        var cancelButton = self.querySelector(
+                            'div:last-child button:first-child');
+                        cancelButton.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            self.dispatchEvent(new CustomEvent(
+                                'mkt-prompt-cancel', true, true));
+                            self.dismissModal();
+                        });
+                    }
+
+                    // Submit button triggers event with data.
+                    var submitButton = self.querySelector(
+                        'div:last-child button:last-child');
                     submitButton.type = 'submit';
                     self.querySelector('form').addEventListener('submit', function(e) {
                         e.preventDefault();
-                        var detail = {
-                            detail: serialize(self.querySelector('form'))
-                        };
-                        self.dispatchEvent(new CustomEvent('mkt-prompt-submit', detail));
+                        var detail = serialize(self.querySelector('form'));
+                        self.dispatchEvent(new CustomEvent(
+                            'mkt-prompt-submit', true, true, detail));
                         self.dismissModal();
-                    });
-                },
+                    }, true);
+                }
             },
             dismissModal: {
                 // Remove the modal from the page.
                 value: function() {
-                    this.parentNode.removeChild(this);
+                    if (this.isModal) {
+                        this.parentNode.removeChild(this);
+                    }
                 }
             },
         }),
