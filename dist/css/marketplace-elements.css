@@ -167,7 +167,7 @@
   }
 }
 .mkt-prompt {
-  background: rgba(203,203,203,0.8);
+  background: rgba(203,203,203,0.4);
   height: 100%;
   left: 0;
   position: fixed;
@@ -177,7 +177,7 @@
 }
 .mkt-prompt section {
   background: #fff;
-  border-radius: 1px;
+  border-radius: 0;
   position: absolute;
   left: 0;
   margin: 5% auto 0;
@@ -195,18 +195,20 @@
 }
 .mkt-prompt h3 {
   font-weight: 500;
+  margin-top: 20px;
 }
 .mkt-prompt p {
   font-size: $font-size;
   line-height: 22px;
+  margin: 15px 0;
 }
 .mkt-prompt textarea {
   border: 1px solid #f1f1f1;
   font-family: "Fira Sans OT", "Fira Sans", FiraSansWeb, sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   min-height: 100px;
   padding: 10px;
-  width: calc(100% - 20px);
+  width: 100%;
 }
 .mkt-prompt select {
   width: 100%;

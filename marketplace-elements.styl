@@ -197,7 +197,7 @@
 }
 
 .mkt-prompt {
-    background: alpha($greyscale-grey, .8);
+    background: alpha($greyscale-grey, .4);
     height: 100%;
     left: 0;
     position: fixed;
@@ -207,7 +207,7 @@
 
     section {
         background: $white;
-        border-radius: 1px
+        border-radius: 0;
         position: absolute;
         left: 0;
         margin: 5% auto 0;
@@ -225,18 +225,20 @@
     }
     h3 {
         font-weight: 500;
+        margin-top: 20px;
     }
     p {
         font-size: $font-size;
         line-height: 22px;
+        margin: 15px 0;
     }
     textarea {
         border: 1px solid $greyscale-light-grey;
         font-family: $primary-font-family;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         min-height: 100px;
         padding: 10px;
-        width: unquote('calc(100% - 20px)');
+        width: 100%;
     }
     select {
         width: 100%;
