@@ -1,13 +1,22 @@
 (function () {
-    var CustomEvent;
+    var CustomEvent, MktEvent;
     (function () {
         // IE Custom Event polyfill.
-        CustomEvent = function(event, bubbles, cancelable, detail) {
+        CustomEvent = function(event, params) {
+            params = params || {};
             var evt = document.createEvent('CustomEvent');
-            evt.initCustomEvent(event, bubbles, cancelable, detail);
+            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
             return evt;
         };
         CustomEvent.prototype = window.Event.prototype;
+        MktEvent = function(event, detail) {
+            // Bubbles/cancelable by default;
+            return CustomEvent(event, {
+                bubbles: true,
+                cancelable: true,
+                detail: detail,
+            });
+        };
     })();
 
     // Mock gettext if it doesn't exist globally.
@@ -34,22 +43,22 @@
         },
         createdCallback: {
             value: function () {
-                var self = this;
+                var root = this;
                 forEach(Object.keys(this.attributeClasses), function (attr) {
-                    var className = self.attributeClasses[attr];
-                    if (self.hasAttribute(attr) && className) {
-                        self.classList.add(className);
+                    var className = root.attributeClasses[attr];
+                    if (root.hasAttribute(attr) && className) {
+                        root.classList.add(className);
                     }
-                    self.__defineGetter__(attr, function () {
+                    root.__defineGetter__(attr, function () {
                         // Treat `foo=""` as `foo=true`.
-                        return self.getAttribute(attr) ||
-                            self.hasAttribute(attr);
+                        return root.getAttribute(attr) ||
+                            root.hasAttribute(attr);
                     });
-                    self.__defineSetter__(attr, function (value) {
+                    root.__defineSetter__(attr, function (value) {
                         if (value === null || value === false) {
-                            self.removeAttribute(attr);
+                            root.removeAttribute(attr);
                         } else {
-                            self.setAttribute(attr, value || true);
+                            root.setAttribute(attr, value || true);
                         }
                     });
                 });
@@ -85,7 +94,7 @@
             },
             html: {
                 value: function (html) {
-                    var self = this;
+                    var root = this;
 
                     var content = document.createElement('div');
                     content.classList.add('mkt-banner-content');
@@ -99,7 +108,7 @@
                         closeButton.title = gettext('Close');
                         closeButton.addEventListener('click', function (e) {
                             e.preventDefault();
-                            self.dismissBanner();
+                            root.dismissBanner();
                         });
                         content.appendChild(closeButton);
                     }
@@ -324,39 +333,58 @@
         prototype: Object.create(MktHTMLElement.prototype, {
             createdCallback: {
                 value: function() {
-                    var self = this;
-                    self.isModal = self.hasAttribute('data-modal');
-                    self.classList.add('mkt-prompt');
+                    var root = this;
+                    this.isModal = this.hasAttribute('data-modal');
+                    this.classList.add('mkt-prompt');
 
-                    if (self.isModal) {
+                    // Wrap in a section.
+                    var section = document.createElement('section');
+                    section.className = 'mkt-prompt-content';
+                    forEach(this.children, function(child) {
+                        section.appendChild(child);
+                    });
+                    this.appendChild(section);
+
+                    this.querySelector('form > div:last-child')
+                        .classList.add('mkt-prompt-btn-wrap');
+
+                    // Default behavior is to allow the first button act as
+                    // the cancel button. And the second to be the submit button.
+                    forEach(this.querySelectorAll('.mkt-prompt-btn-wrap button'), function(btn, i) {
+                        if (i === 0 && !btn.hasAttribute('type')) {
+                            btn.type = 'cancel';
+                        } else if (i === 1 && !btn.hasAttribute('type')) {
+                            btn.type = 'submit';
+                        }
+                    });
+
+                    if (this.isModal) {
                         // Dismiss if click outside of the modal.
-                        self.addEventListener('click', function(e) {
-                            if (e.target === self) {
-                                self.dismissModal();
+                        this.addEventListener('click', function(e) {
+                            if (e.target === root) {
+                                root.dismissModal();
                             }
                         });
 
                         // Cancel button closes modal.
-                        var cancelButton = self.querySelector(
-                            'div:last-child button:first-child');
+                        var cancelButton = this.querySelector('button[type="cancel"]');
                         cancelButton.addEventListener('click', function(e) {
                             e.preventDefault();
-                            self.dispatchEvent(new CustomEvent(
-                                'mkt-prompt-cancel', true, true));
-                            self.dismissModal();
+                            this.dispatchEvent(MktEvent('mkt-prompt-cancel'));
+                            root.dismissModal();
                         });
                     }
 
                     // Submit button triggers event with data.
-                    var submitButton = self.querySelector(
-                        'div:last-child button:last-child');
-                    submitButton.type = 'submit';
-                    self.querySelector('form').addEventListener('submit', function(e) {
+                    var submitButton = this.querySelector('button[type="submit"]');
+                    var form = this.querySelector('form');
+                    form.addEventListener('submit', function(e) {
                         e.preventDefault();
-                        var detail = serialize(self.querySelector('form'));
-                        self.dispatchEvent(new CustomEvent(
-                            'mkt-prompt-submit', true, true, detail));
-                        self.dismissModal();
+                        if (root.validate()) {
+                            var detail = serialize(root.querySelector('form'));
+                            root.dispatchEvent(MktEvent('mkt-prompt-submit', detail));
+                            root.dismissModal();
+                        }
                     }, true);
                 }
             },
@@ -366,6 +394,11 @@
                     if (this.isModal) {
                         this.parentNode.removeChild(this);
                     }
+                }
+            },
+            validate: {
+                value: function() {
+                    return this.querySelector('form').checkValidity();
                 }
             },
         }),

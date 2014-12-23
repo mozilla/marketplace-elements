@@ -197,17 +197,14 @@
 }
 
 /*
-    .mkt-prompt - form as full width of page. Has only a full-width submit btn.
-    .mkt-prompt[data-modal] - modal overlay. Has 50%-width cancel/submit btns.
+    .mkt-prompt - form as full width of page. By default, only a full-width submit btn.
+    .mkt-prompt[data-modal] - modal overlay. By default, half-width cancel/submit btns.
 */
 .mkt-prompt {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     position: relative;
     width: 100%;
 
-    section {
+    .mkt-prompt-content {
         background: $white;
         padding-bottom: 10px;
 
@@ -216,14 +213,9 @@
             padding: 5px 20px;
         }
     }
-    form {
-        > div:not(:last-child) {
-            margin-bottom: 20px;
-            width: 100%;
-        }
-        > div:last-child {
-            position: relative;
-        }
+    form > div:not(.mkt-prompt-btn-wrap) {
+        margin-bottom: 20px;
+        width: 100%;
     }
     h3 {
         font-weight: 500;
@@ -236,6 +228,9 @@
     }
     textarea {
         border: 1px solid $greyscale-light-grey;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
         font-family: $primary-font-family;
         margin-bottom: 25px;
         min-height: 100px;
@@ -247,21 +242,26 @@
     }
 }
 
-.mkt-prompt div > button {
+.mkt-prompt-btn-wrap {
+    display: inline-flex;
+    width: 100%;
+}
+
+.mkt-prompt-btn-wrap button {
     border: 0;
     color: $white;
+    flex-grow: 1;
     font-size: 13px;
     font-weight: 400;
     height: 48px;
-    width: 100%;
 
     &:hover {
         cursor: pointer;
     }
-    &:first-child {
+    &[type="cancel"] {
+        // Cancel button.
         display: none;  // Don't show cancel button as a page.
         background: $action-error;
-        left: 0;
 
         &:hover {
             background: $action-error-hover;
@@ -270,9 +270,8 @@
             background: $action-error-tapped;
         }
     }
-    &:last-child {
+    &[type="submit"] {
         background: $action-success;
-        right: 0;
 
         &:hover {
             background: $action-success-hover;
@@ -280,6 +279,14 @@
         &:active {
             background: $action-success-tapped;
         }
+    }
+}
+
+.mkt-prompt form:invalid [type="submit"] {
+    background: $greyscale-grey;
+
+    &:hover {
+        cursor: default;
     }
 }
 
@@ -292,7 +299,7 @@
     width: 100%;
     z-index: 1000;  // TODO: write a z-index system.
 
-    section {
+    .mkt-prompt-content {
         border-radius: 0;
         padding-bottom: 0;
         position: absolute;
@@ -302,24 +309,22 @@
         right: 0;
         width: 90%;
     }
-    form > div:last-child {
-        position: static;
+    .mkt-prompt-btn-wrap {
+        margin-bottom: -5px;
+        position: relative;
+        right: 20px;
+        width: unquote('calc(100% + 40px)');
     }
-    div > button {
-        position: absolute;
-        width: 50%;
-
-        &:first-child {
-            display: inline-block;
-        }
+    [type="cancel"] {
+        display: inline-block;
     }
 }
 
 @media $base-tablet {
-    .mkt-prompt section {
+    .mkt-prompt .mkt-prompt-content {
         margin-bottom: 20px;
     }
-    .mkt-prompt[data-modal] section {
-        width: (100 / 3 * 2)%;
+    .mkt-prompt[data-modal] .mkt-prompt-content {
+        width: (2 / 3 * 100)%;
     }
 }
