@@ -166,30 +166,23 @@
     display: none;
   }
 }
+/*
+    .mkt-prompt - form as full width of page. By default, only a full-width submit btn.
+    .mkt-prompt[data-modal] - modal overlay. By default, half-width cancel/submit btns.
+*/
 .mkt-prompt {
-  background: rgba(203,203,203,0.4);
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
+  position: relative;
   width: 100%;
-  z-index: 1000;
 }
-.mkt-prompt section {
+.mkt-prompt .mkt-prompt-content {
   background: #fff;
-  border-radius: 0;
-  position: absolute;
-  left: 0;
-  margin: 5% auto 0;
-  max-width: 535px;
-  right: 0;
-  width: 90%;
+  padding-bottom: 10px;
 }
-.mkt-prompt section > form:first-child,
-.mkt-prompt section > div:first-child {
+.mkt-prompt .mkt-prompt-content > form:first-child,
+.mkt-prompt .mkt-prompt-content > div:first-child {
   padding: 5px 20px;
 }
-.mkt-prompt form > div:not(:last-child) {
+.mkt-prompt form > div:not(.mkt-prompt-btn-wrap) {
   margin-bottom: 20px;
   width: 100%;
 }
@@ -204,8 +197,11 @@
 }
 .mkt-prompt textarea {
   border: 1px solid #f1f1f1;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   font-family: "Fira Sans OT", "Fira Sans", FiraSansWeb, sans-serif;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   min-height: 100px;
   padding: 10px;
   width: 100%;
@@ -213,40 +209,79 @@
 .mkt-prompt select {
   width: 100%;
 }
-.mkt-prompt div > button {
+.mkt-prompt-btn-wrap {
+  display: inline-flex;
+  width: 100%;
+}
+.mkt-prompt-btn-wrap button {
   border: 0;
   color: #fff;
+  flex-grow: 1;
   font-size: 13px;
   font-weight: 400;
   height: 48px;
-  width: 50%;
-  position: absolute;
 }
-.mkt-prompt div > button:hover {
+.mkt-prompt-btn-wrap button:hover {
   cursor: pointer;
 }
-.mkt-prompt div > button:first-child {
+.mkt-prompt-btn-wrap button[type="cancel"] {
+  display: none;
   background: #f54b3c;
-  left: 0;
 }
-.mkt-prompt div > button:first-child:hover {
+.mkt-prompt-btn-wrap button[type="cancel"]:hover {
   background: #ff6c70;
 }
-.mkt-prompt div > button:first-child:active {
+.mkt-prompt-btn-wrap button[type="cancel"]:active {
   background: #b63932;
 }
-.mkt-prompt div > button:last-child {
+.mkt-prompt-btn-wrap button[type="submit"] {
   background: #64be3c;
-  right: 0;
 }
-.mkt-prompt div > button:last-child:hover {
+.mkt-prompt-btn-wrap button[type="submit"]:hover {
   background: #66d071;
 }
-.mkt-prompt div > button:last-child:active {
+.mkt-prompt-btn-wrap button[type="submit"]:active {
   background: #4d8d32;
 }
+.mkt-prompt form:invalid [type="submit"] {
+  background: #cbcbcb;
+}
+.mkt-prompt form:invalid [type="submit"]:hover {
+  cursor: default;
+}
+.mkt-prompt[data-modal] {
+  background: rgba(203,203,203,0.8);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.mkt-prompt[data-modal] .mkt-prompt-content {
+  border-radius: 0;
+  padding-bottom: 0;
+  position: absolute;
+  left: 0;
+  margin: 5% auto 0;
+  max-width: 535px;
+  right: 0;
+  width: 90%;
+}
+.mkt-prompt[data-modal] .mkt-prompt-btn-wrap {
+  margin-bottom: -5px;
+  position: relative;
+  right: 20px;
+  width: calc(100% + 40px);
+}
+.mkt-prompt[data-modal] [type="cancel"] {
+  display: inline-block;
+}
 @media (min-width: 700px) {
-  .mkt-prompt section {
-    width: 66.66666666666667%;
+  .mkt-prompt .mkt-prompt-content {
+    margin-bottom: 20px;
+  }
+  .mkt-prompt[data-modal] .mkt-prompt-content {
+    width: 66.6666666666667%;
   }
 }

@@ -1,6 +1,17 @@
+html, body {
+    overflow-x: hidden;
+}
+
 body {
-    font-family: "Fira Sans OT", "Fira Sans", FiraSansWeb, sans-serif;
     background: #eee;
+    font-family: "Fira Sans OT", "Fira Sans", FiraSansWeb, sans-serif;
+    margin: 10px 0;
+}
+
+body,
+mkt-tabs,
+section.mkt-tab {
+    width: 100%;
 }
 
 hr {
@@ -9,7 +20,8 @@ hr {
 
 .page {
     margin: 0 auto;
-    width: 800px;
+    max-width: 800px;
+    width: 100%;
 }
 .page > mkt-banner {
     margin-bottom: 20px;

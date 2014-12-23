@@ -2,6 +2,9 @@
 <html>
   <head>
     <title>Marketplace Elements</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
     <link rel="stylesheet" href="bower_components/marketplace-frontend/src/media/css/typography.css">
     <link rel="stylesheet" href="bower_components/marketplace-frontend/src/media/css/pretty-select.css">
 
@@ -77,46 +80,80 @@
 </pre>
         </section>
 
-        <!--Prompt-->
         <section name="mkt-prompt">
+          <!--Prompt (as a page)-->
           <mkt-prompt>
-            <section>
-              <form>
-                <h3>Do you want to build a snowman?</h3>
-                <p>Come on let's go and play. I never see you anymore.</p>
-                <div class="pretty-select"><select>
-                  <option>It doesn't have to be a snowman</option>
-                </select></div>
-                <textarea name="snowman" placeholder="Come out the door."></textarea>
-                <div>
-                  <button>Nah</button>
-                  <button>Yah</button>
-                </div>
-              </form>
-            </section>
+            <form>
+              <h3>Do you want to build a snowman?</h3>
+              <p>Come on let's go and play. I never see you anymore.</p>
+              <div class="pretty-select"><select required>
+                <option selected></option>
+                <option>It doesn't have to be a snowman</option>
+              </select></div>
+              <textarea name="snowman" placeholder="Come out the door."
+                        required></textarea>
+              <div>
+                <button>Nah</button>
+                <button>Yah</button>
+              </div>
+            </form>
           </mkt-prompt>
 <pre>
  &lt;mkt-prompt&gt;
-   &lt;section&gt;
-     &lt;form&gt;
-       &lt;h3&gt;Do you want to build a snowman?&lt;/h3&gt;
-       &lt;p&gt;Come on let's go and play. I never see you anymore.&lt;/p&gt;
-       &lt;div class="pretty-select"&gt;&lt;select&gt;
-         &lt;option&gt;It doesn't have to be a snowman&lt;/option&gt;
-       &lt;/select&gt;&lt;/div&gt;
-       &lt;textarea name="snowman" placeholder="Come out the door."&gt;&lt;/textarea&gt;
-       &lt;div&gt;
-         &lt;button&gt;Nah&lt;/button&gt;
-         &lt;button&gt;Yah&lt;/button&gt;
-       &lt;/div&gt;
-     &lt;/form&gt;
-   &lt;/section&gt;
- &lt;/mkt-prompt&gt;
+    &lt;section&gt;
+      &lt;form&gt;
+        &lt;h3&gt;Do you want to build a snowman?&lt;/h3&gt;
+        &lt;p&gt;Come on let's go and play. I never see you anymore.&lt;/p&gt;
+        &lt;div class="pretty-select"&gt;&lt;select required&gt;
+          &lt;option&gt;It doesn't have to be a snowman&lt;/option&gt;
+        &lt;/select&gt;&lt;/div&gt;
+        &lt;textarea name="snowman" placeholder="Come out the door."
+                  required&gt;&lt;/textarea&gt;
+        &lt;div&gt;
+          &lt;button&gt;Nah&lt;/button&gt;
+          &lt;button&gt;Yah&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/section&gt;
+  &lt;/mkt-prompt&gt;
+</pre>
+
+          <!--Prompt (as a modal)-->
+          <mkt-prompt data-modal>
+            <form>
+              <h3>Do you want to build a snowman?</h3>
+              <p>Come on let's go and play. I never see you anymore.</p>
+              <div class="pretty-select"><select>
+                <option>It doesn't have to be a snowman</option>
+              </select></div>
+              <textarea name="snowman" placeholder="Come out the door."
+                        required></textarea>
+              <div>
+                <button>Nah</button>
+                <button>Yah</button>
+              </div>
+            </form>
+          </mkt-prompt>
+<pre>
+  &lt;mkt-prompt data-modal&gt;
+    &lt;form&gt;
+      &lt;h3&gt;Do you want to build a snowman?&lt;/h3&gt;
+      &lt;p&gt;Come on let's go and play. I never see you anymore.&lt;/p&gt;
+      &lt;div class="pretty-select"&gt;&lt;select&gt;
+        &lt;option&gt;It doesn't have to be a snowman&lt;/option&gt;
+      &lt;/select&gt;&lt;/div&gt;
+      &lt;textarea name="snowman" placeholder="Come out the door."
+                required&gt;&lt;/textarea&gt;
+      &lt;div&gt;
+        &lt;button&gt;Nah&lt;/button&gt;
+        &lt;button&gt;Yah&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/mkt-prompt&gt;
 </pre>
         </section>
       </mkt-tabs>
     </div>
-
   <script src="gh-pages/page.js"></script>
   </body>
 </html>

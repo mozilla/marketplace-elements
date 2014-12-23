@@ -68,7 +68,10 @@ A login link. This is pretty basic. It will add the "persona" class to a link.
 Prompt
 ------
 
-A prompt modal with a cancel button and a submit button. Supports forms.
+A form that can take the form of a page or as a modal. As a page, it
+has just a submit button. As a modal, it has a cancel and submit button.
+
+As a page:
 
 ```html
 <mkt-prompt>
@@ -83,8 +86,22 @@ A prompt modal with a cancel button and a submit button. Supports forms.
 </mkt-prompt>
 ```
 
-The prompt modal fires two events:
+As a modal:
 
-- **mkt-prompt-cancel** - fired when the cancel button is clicked
-- **mkt-prompt-submit** - fired when the submit button is clicked.
-  Passes the serialized form data in the event's details.
+```
+<mkt-prompt data-modal>
+...
+```
+
+### Events
+
+| event             | description |
+|-------------------|-------------|
+| mkt-prompt-cancel | cancel button is clicked |
+| mkt-prompt-submit | submit button is clicked. Serialized form data is passed in event details. |
+
+### Configuration
+
+| attribute | description |
+|-----------|-------------|
+| validate  | function to determine form validity. Defaults to only call form.checkvalidity. |

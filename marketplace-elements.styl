@@ -196,30 +196,24 @@
     }
 }
 
+/*
+    .mkt-prompt - form as full width of page. By default, only a full-width submit btn.
+    .mkt-prompt[data-modal] - modal overlay. By default, half-width cancel/submit btns.
+*/
 .mkt-prompt {
-    background: alpha($greyscale-grey, .4);
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
+    position: relative;
     width: 100%;
-    z-index: 1000;  // TODO: write a z-index system.
 
-    section {
+    .mkt-prompt-content {
         background: $white;
-        border-radius: 0;
-        position: absolute;
-        left: 0;
-        margin: 5% auto 0;
-        max-width: ($max-site-width / 2)px;
-        right: 0;
-        width: 90%;
+        padding-bottom: 10px;
+
+        > form:first-child,
+        > div:first-child {
+            padding: 5px 20px;
+        }
     }
-    section > form:first-child,
-    section > div:first-child {
-        padding: 5px 20px;
-    }
-    form > div:not(:last-child) {
+    form > div:not(.mkt-prompt-btn-wrap) {
         margin-bottom: 20px;
         width: 100%;
     }
@@ -234,8 +228,11 @@
     }
     textarea {
         border: 1px solid $greyscale-light-grey;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
         font-family: $primary-font-family;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         min-height: 100px;
         padding: 10px;
         width: 100%;
@@ -243,45 +240,91 @@
     select {
         width: 100%;
     }
-    div > button {
-        border: 0;
-        color: $white;
-        font-size: 13px;
-        font-weight: 400;
-        height: 48px;
-        width: 50%;
-        position: absolute;
+}
+
+.mkt-prompt-btn-wrap {
+    display: inline-flex;
+    width: 100%;
+}
+
+.mkt-prompt-btn-wrap button {
+    border: 0;
+    color: $white;
+    flex-grow: 1;
+    font-size: 13px;
+    font-weight: 400;
+    height: 48px;
+
+    &:hover {
+        cursor: pointer;
+    }
+    &[type="cancel"] {
+        // Cancel button.
+        display: none;  // Don't show cancel button as a page.
+        background: $action-error;
 
         &:hover {
-            cursor: pointer;
+            background: $action-error-hover;
         }
-        &:first-child {
-            background: $action-error;
-            left: 0;
-
-            &:hover {
-                background: $action-error-hover;
-            }
-            &:active {
-                background: $action-error-tapped;
-            }
+        &:active {
+            background: $action-error-tapped;
         }
-        &:last-child {
-            background: $action-success;
-            right: 0;
+    }
+    &[type="submit"] {
+        background: $action-success;
 
-            &:hover {
-                background: $action-success-hover;
-            }
-            &:active {
-                background: $action-success-tapped;
-            }
+        &:hover {
+            background: $action-success-hover;
+        }
+        &:active {
+            background: $action-success-tapped;
         }
     }
 }
 
+.mkt-prompt form:invalid [type="submit"] {
+    background: $greyscale-grey;
+
+    &:hover {
+        cursor: default;
+    }
+}
+
+.mkt-prompt[data-modal] {
+    background: alpha($greyscale-grey, .8);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;  // TODO: write a z-index system.
+
+    .mkt-prompt-content {
+        border-radius: 0;
+        padding-bottom: 0;
+        position: absolute;
+        left: 0;
+        margin: 5% auto 0;
+        max-width: ($max-site-width / 2)px;
+        right: 0;
+        width: 90%;
+    }
+    .mkt-prompt-btn-wrap {
+        margin-bottom: -5px;
+        position: relative;
+        right: 20px;
+        width: unquote('calc(100% + 40px)');
+    }
+    [type="cancel"] {
+        display: inline-block;
+    }
+}
+
 @media $base-tablet {
-    .mkt-prompt section {
-        width: (100 / 3 * 2)%;
+    .mkt-prompt .mkt-prompt-content {
+        margin-bottom: 20px;
+    }
+    .mkt-prompt[data-modal] .mkt-prompt-content {
+        width: (2 / 3 * 100)%;
     }
 }
