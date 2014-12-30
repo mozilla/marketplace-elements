@@ -207,7 +207,7 @@
                         this.setAttribute('selected', '');
                         selected = this;
                         select.selectedIndex = this.index;
-                        root.dispatchEvent(new Event('change'));
+                        root.dispatchEvent(new Event('change', {bubbles: true}));
                     }
 
                     buttons.forEach(function(button) {
@@ -268,7 +268,7 @@
                         this.setAttribute('selected', '');
                         selected = this;
                         select.selectedIndex = this.index;
-                        root.dispatchEvent(new Event('change'));
+                        root.dispatchEvent(new Event('change', {bubbles: true}));
                     }
 
                     buttons.forEach(function(button) {

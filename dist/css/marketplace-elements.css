@@ -250,7 +250,7 @@
   cursor: default;
 }
 .mkt-prompt[data-modal] {
-  background: rgba(203,203,203,0.8);
+  background: 1;
   height: 100%;
   left: 0;
   position: fixed;
@@ -282,6 +282,6 @@
     margin-bottom: 20px;
   }
   .mkt-prompt[data-modal] .mkt-prompt-content {
-    width: 66.6666666666667%;
+    width: 66.66666666666666%;
   }
 }
