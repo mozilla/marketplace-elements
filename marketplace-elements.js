@@ -198,44 +198,48 @@
             createdCallback: {
                 value: function () {
                     var root = this;
-                    var select = this.querySelector('select');
-                    this.select = select;
-                    select.classList.add('mkt-segmented-select');
+                    this.select = this.querySelector('select');
+                    this.select.classList.add('mkt-segmented-select');
                     this.classList.add('mkt-segmented');
 
-                    var buttons = map(select.options, function(option, i) {
+                    this.buttons = map(this.select.options, function (option, i) {
                         var button = document.createElement('button');
                         button.index = i;
                         button.classList.add('mkt-segmented-button');
                         button.textContent = option.textContent;
-                        button.addEventListener('click', selectButton);
+                        button.addEventListener('click', function() {
+                            root.selectButton(this);
+                            root.dispatchEvent(new Event('change', {bubbles: true}));
+                        });
                         return button;
                     });
-
-                    var selected;
-                    // This call will set `selected`.
-                    selectButton.call(buttons[select.selectedIndex]);
-
-                    function selectButton() {
-                        if (selected == this) {
-                            return;
-                        } else if (selected) {
-                            selected.removeAttribute('selected');
-                        }
-                        this.setAttribute('selected', '');
-                        selected = this;
-                        select.selectedIndex = this.index;
-                        root.dispatchEvent(new Event('change', {bubbles: true}));
-                    }
-
-                    buttons.forEach(function(button) {
+                    this.selectButton(this.buttons[this.select.selectedIndex]);
+                    this.buttons.forEach(function(button) {
                         root.appendChild(button);
                     });
+                },
+            },
+            selectButton: {
+                value: function (button) {
+                    if (this.selected == button) {
+                        return;
+                    } else if (this.selected) {
+                        this.selected.removeAttribute('selected');
+                    }
+                    button.setAttribute('selected', '');
+                    this.selected = button;
+                    this.select.selectedIndex = button.index;
                 },
             },
             value: {
                 get: function () {
                     return this.select.value;
+                },
+                set: function (value) {
+                    if (this.select.value !== value) {
+                        this.select.value = value;
+                        this.selectButton(this.buttons[this.select.selectedIndex]);
+                    }
                 },
             }
         }),
@@ -246,24 +250,23 @@
             createdCallback: {
                 value: function () {
                     var root = this;
-                    var select = this.querySelector('select');
-                    this.select = select;
-                    select.classList.add('mkt-tab-control-select');
+                    this.select = this.querySelector('select');
+                    this.select.classList.add('mkt-tab-control-select');
                     this.classList.add('mkt-tab-control');
 
-                    var buttons = map(select.options, function (option, i) {
+                    this.buttons = map(this.select.options, function (option, i) {
                         var button = document.createElement('button');
                         button.index = i;
                         button.classList.add('mkt-tab-control-button');
                         button.textContent = option.textContent;
-                        button.addEventListener('click', selectButton);
+                        button.addEventListener('click', function() {
+                            root.selectButton(this);
+                            root.dispatchEvent(new Event('change', {bubbles: true}));
+                        });
                         return button;
                     });
 
-                    // Set the currently selected option.
-                    var selected;
-                    // This call will set `selected`.
-                    selectButton.call(buttons[select.selectedIndex]);
+                    this.selectButton(this.buttons[this.select.selectedIndex]);
 
                     // Hook this up to a <mkt-tabs> if `control` is set.
                     var controlledTabsId = root.getAttribute('control');
@@ -277,26 +280,32 @@
                         });
                     }
 
-                    function selectButton() {
-                        if (selected == this) {
-                            return;
-                        } else if (selected) {
-                            selected.removeAttribute('selected');
-                        }
-                        this.setAttribute('selected', '');
-                        selected = this;
-                        select.selectedIndex = this.index;
-                        root.dispatchEvent(new Event('change', {bubbles: true}));
-                    }
-
-                    buttons.forEach(function(button) {
+                    this.buttons.forEach(function(button) {
                         root.appendChild(button);
                     });
+                },
+            },
+            selectButton: {
+                value: function (button) {
+                    if (this.selected == button) {
+                        return;
+                    } else if (this.selected) {
+                        this.selected.removeAttribute('selected');
+                    }
+                    button.setAttribute('selected', '');
+                    this.selected = button;
+                    this.select.selectedIndex = button.index;
                 },
             },
             value: {
                 get: function () {
                     return this.select.value;
+                },
+                set: function (value) {
+                    if (this.select.value !== value) {
+                        this.select.value = value;
+                        this.selectButton(this.buttons[this.select.selectedIndex]);
+                    }
                 },
             }
         }),
