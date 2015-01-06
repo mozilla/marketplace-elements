@@ -226,13 +226,13 @@
 }
 .mkt-prompt-btn-wrap button[type="cancel"] {
   display: none;
-  background: #f54b3c;
+  background: #4cb1ff;
 }
 .mkt-prompt-btn-wrap button[type="cancel"]:hover {
-  background: #ff6c70;
+  background: #42cafe;
 }
 .mkt-prompt-btn-wrap button[type="cancel"]:active {
-  background: #b63932;
+  background: #3d86bd;
 }
 .mkt-prompt-btn-wrap button[type="submit"] {
   background: #64be3c;
@@ -250,7 +250,7 @@
   cursor: default;
 }
 .mkt-prompt[data-modal] {
-  background: 1;
+  background: rgba(203,203,203,0.8);
   height: 100%;
   left: 0;
   position: fixed;
@@ -282,6 +282,6 @@
     margin-bottom: 20px;
   }
   .mkt-prompt[data-modal] .mkt-prompt-content {
-    width: 66.66666666666666%;
+    width: 66.6666666666667%;
   }
 }

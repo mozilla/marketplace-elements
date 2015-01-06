@@ -1,7 +1,7 @@
 marketplace-elements
 ====================
 
-Web component UI elements for Firefox Marketplace.
+Custom HTML elements for Firefox Marketplace.
 
     make install
     make
