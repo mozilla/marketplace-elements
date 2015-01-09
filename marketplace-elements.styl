@@ -1,5 +1,8 @@
 @import 'bower_components/marketplace-frontend/src/media/css/lib';
 
+$font-narrow = 100;
+$font-bold = 500;
+
 .mkt-cloak {
     display: none;
 }
@@ -19,26 +22,43 @@
     position: relative;
     text-align: center;
 
-    .close {
-        margin: -17px 0 0 0;
+    .mkt-banner-close {
+        color: $greyscale-white;
+        cursor: pointer;
+        font-size: 40px;
+        font-weight: $font-narrow;
+        line-height: 0;
+        padding: 0 10px 0 0;
+        position: absolute;
+        right: 0;
         top: 50%;
     }
 
-    .close,
-    .close:hover {
-        background-color: transparent;
+    .mkt-banner-close:hover {
+        color: rgba($greyscale-white, 0.8);
     }
 
-    span {
+    .mkt-banner-close:active {
+        color: rgba($greyscale-white, 0.6);
+    }
+
+    > span {
         display: inline-block;
         margin-top: 10px;
         padding: 0;
     }
 
     a {
+        color: $white;
+        font-weight: $font-narrow;
+        text-decoration: underline;
+    }
+
+    > a {
         border-radius: 5px;
         color: #fff;
         display: inline-block;
+        font-weight: $font-bold;
         margin: 10px;
         padding: 10px;
         text-decoration: none;
@@ -59,43 +79,64 @@
     }
 }
 
-.mkt-banner-firefox {
+.mkt-banner[theme="firefox"] {
     .mkt-banner-content {
         background: url("../../img/logos/firefox-64.png") no-repeat;
         background-position: 0 50%;
         background-size: 64px 60px;
         min-height: 60px;
         padding: 0 40px 0 70px;
-    }
 
-    a {
-        background-color: $darker-gray;
+        > a {
+            background-color: $darker-gray;
 
-        &:hover {
-            background-color: darken($darker-gray, 10%);
+            &:hover {
+                background-color: darken($darker-gray, 10%);
+            }
         }
     }
 }
 
-.mkt-banner-success {
-    background: $action-success;
-
-    .mkt-banner-content {
-        font-size: 15px;
-        font-weight: 500;
-        padding: 0 40px;
-    }
+.mkt-banner-content {
+    font-size: 15px;
+    font-weight: $font-bold;
+    padding: 0 40px;
 
     small {
         font-size: 15px;
-        font-weight: 400;
+        font-weight: $font-bold;
+    }
+}
+
+$banner-colors = $action-success $action-positive $action-wait $action-error;
+$banner-colors-hover = $action-success-hover $action-positive-hover $action-wait-hover $action-error-hover;
+$banner-colors-tapped = $action-success-tapped $action-positive-tapped $action-wait-tapped $action-error-tapped;
+$banner-names = success positive "wait" error;
+for $i in (0..3) {
+    $banner-color = $banner-colors[$i];
+    $banner-color-hover = $banner-colors-hover[$i];
+    $banner-color-tapped = $banner-colors-tapped[$i];
+    $banner-name = $banner-names[$i];
+
+    .mkt-banner[theme={$banner-name}] {
+        background: $banner-color;
+        .mkt-banner-content > a {
+            background-color: $banner-color-tapped;
+
+            &:hover {
+                background-color: darken($banner-color-tapped, 10%);
+            }
+        }
     }
 
-    a {
-        background-color: $dark-green;
+    .mkt-banner[theme={$banner-name}-light] {
+        background: $banner-color-hover;
+        .mkt-banner-content > a {
+            background-color: $banner-color-tapped;
 
-        &:hover {
-            background-color: darken($dark-green, 10%);
+            &:hover {
+                background-color: darken($banner-color-tapped, 10%);
+            }
         }
     }
 }
@@ -218,7 +259,7 @@
         width: 100%;
     }
     h3 {
-        font-weight: 500;
+        font-weight: $font-bold;
         margin-top: 20px;
     }
     p {
@@ -252,7 +293,7 @@
     color: $white;
     flex-grow: 1;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: $font-bold;
     height: 48px;
 
     &:hover {

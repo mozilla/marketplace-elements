@@ -70,7 +70,6 @@
         prototype: Object.create(MktHTMLElement.prototype, {
             attributeClasses: {
                 value: {
-                    success: 'mkt-banner-success',
                     dismiss: null,
                 },
             },
@@ -79,9 +78,8 @@
                     MktHTMLElement.prototype.createdCallback.call(this);
                     this.classList.add('mkt-banner');
 
-                    // This is a Firefox banner if it isn't a success banner.
-                    if (!this.success) {
-                        this.classList.add('mkt-banner-firefox');
+                    if (!this.hasAttribute('theme')) {
+                        this.setAttribute('theme', 'success');
                     }
 
                     if (this.rememberDismissal && this.dismissed) {
@@ -101,10 +99,10 @@
                     content.innerHTML = html;
 
                     if (!this.undismissable) {
-                        var closeButton = document.createElement('a');
-                        closeButton.classList.add('close');
+                        var closeButton = document.createElement('div');
+                        closeButton.classList.add('mkt-banner-close');
                         closeButton.href = '#';
-                        closeButton.textContent = '';
+                        closeButton.innerHTML = '&times;';
                         closeButton.title = gettext('Close');
                         closeButton.addEventListener('click', function (e) {
                             e.preventDefault();

@@ -15,32 +15,47 @@
   position: relative;
   text-align: center;
 }
-.mkt-banner-content .close {
-  margin: -17px 0 0 0;
+.mkt-banner-content .mkt-banner-close {
+  color: #fff;
+  cursor: pointer;
+  font-size: 40px;
+  font-weight: 100;
+  line-height: 0;
+  padding: 0 10px 0 0;
+  position: absolute;
+  right: 0;
   top: 50%;
 }
-.mkt-banner-content .close,
-.mkt-banner-content .close:hover {
-  background-color: transparent;
+.mkt-banner-content .mkt-banner-close:hover {
+  color: rgba(255,255,255,0.8);
 }
-.mkt-banner-content span {
+.mkt-banner-content .mkt-banner-close:active {
+  color: rgba(255,255,255,0.6);
+}
+.mkt-banner-content > span {
   display: inline-block;
   margin-top: 10px;
   padding: 0;
 }
 .mkt-banner-content a {
+  color: #fff;
+  font-weight: 100;
+  text-decoration: underline;
+}
+.mkt-banner-content > a {
   border-radius: 5px;
   color: #fff;
   display: inline-block;
+  font-weight: 500;
   margin: 10px;
   padding: 10px;
   text-decoration: none;
 }
-.mkt-banner-content a.spin {
+.mkt-banner-content > a.spin {
   color: transparent;
   position: relative;
 }
-.mkt-banner-content a.spin:after {
+.mkt-banner-content > a.spin:after {
   -webkit-animation: 0.9s spin infinite steps(30);
   animation: 0.9s spin infinite steps(30);
   height: 30px;
@@ -57,36 +72,99 @@
   position: absolute;
   top: calc(50% - 11px);
 }
-.mkt-banner-firefox .mkt-banner-content {
+.mkt-banner[theme="firefox"] .mkt-banner-content {
   background: url("../../img/logos/firefox-64.png") no-repeat;
   background-position: 0 50%;
   background-size: 64px 60px;
   min-height: 60px;
   padding: 0 40px 0 70px;
 }
-.mkt-banner-firefox a {
+.mkt-banner[theme="firefox"] .mkt-banner-content > a {
   background-color: #535353;
 }
-.mkt-banner-firefox a:hover {
+.mkt-banner[theme="firefox"] .mkt-banner-content > a:hover {
   background-color: #4b4b4b;
 }
-.mkt-banner-success {
-  background: #64be3c;
-}
-.mkt-banner-success .mkt-banner-content {
+.mkt-banner-content {
   font-size: 15px;
   font-weight: 500;
   padding: 0 40px;
 }
-.mkt-banner-success small {
+.mkt-banner-content small {
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 500;
 }
-.mkt-banner-success a {
-  background-color: #118e36;
+.mkt-banner[theme=success] {
+  background: #64be3c;
 }
-.mkt-banner-success a:hover {
-  background-color: #0f8031;
+.mkt-banner[theme=success] .mkt-banner-content > a {
+  background-color: #4d8d32;
+}
+.mkt-banner[theme=success] .mkt-banner-content > a:hover {
+  background-color: #457f2d;
+}
+.mkt-banner[theme=success-light] {
+  background: #66d071;
+}
+.mkt-banner[theme=success-light] .mkt-banner-content > a {
+  background-color: #4d8d32;
+}
+.mkt-banner[theme=success-light] .mkt-banner-content > a:hover {
+  background-color: #457f2d;
+}
+.mkt-banner[theme=positive] {
+  background: #4cb1ff;
+}
+.mkt-banner[theme=positive] .mkt-banner-content > a {
+  background-color: #3d86bd;
+}
+.mkt-banner[theme=positive] .mkt-banner-content > a:hover {
+  background-color: #3779aa;
+}
+.mkt-banner[theme=positive-light] {
+  background: #42cafe;
+}
+.mkt-banner[theme=positive-light] .mkt-banner-content > a {
+  background-color: #3d86bd;
+}
+.mkt-banner[theme=positive-light] .mkt-banner-content > a:hover {
+  background-color: #3779aa;
+}
+.mkt-banner[theme=wait] {
+  background: #ffdc32;
+}
+.mkt-banner[theme=wait] .mkt-banner-content > a {
+  background-color: #bea434;
+}
+.mkt-banner[theme=wait] .mkt-banner-content > a:hover {
+  background-color: #ab942f;
+}
+.mkt-banner[theme=wait-light] {
+  background: #ffe26e;
+}
+.mkt-banner[theme=wait-light] .mkt-banner-content > a {
+  background-color: #bea434;
+}
+.mkt-banner[theme=wait-light] .mkt-banner-content > a:hover {
+  background-color: #ab942f;
+}
+.mkt-banner[theme=error] {
+  background: #f54b3c;
+}
+.mkt-banner[theme=error] .mkt-banner-content > a {
+  background-color: #b63932;
+}
+.mkt-banner[theme=error] .mkt-banner-content > a:hover {
+  background-color: #a4332d;
+}
+.mkt-banner[theme=error-light] {
+  background: #ff6c70;
+}
+.mkt-banner[theme=error-light] .mkt-banner-content > a {
+  background-color: #b63932;
+}
+.mkt-banner[theme=error-light] .mkt-banner-content > a:hover {
+  background-color: #a4332d;
 }
 .mkt-segmented-select {
   display: none;
@@ -218,7 +296,7 @@
   color: #fff;
   flex-grow: 1;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   height: 48px;
 }
 .mkt-prompt-btn-wrap button:hover {

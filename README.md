@@ -27,7 +27,7 @@ The banner is used to show messages to users.
 
 | attribute | description |
 |-----------|-------------|
-| success   | Make it green |
+| theme     | Change the color scheme. May be any of the actions defined in [marketplace-frontend](https://github.com/mozilla/fireplace/blob/master/src/media/css/lib/colors.styl) or a light variant. Examples: `"success"` (default) or `"success-light"`. Additionally `"firefox"` may be specified for a gray banner with the Firefox logo. |
 | dismiss   | Configure dismissal. Values: `"on"` (default), `"off"`, `"remember"`. |
 
 Segmented
