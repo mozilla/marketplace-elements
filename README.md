@@ -105,3 +105,18 @@ As a modal:
 | attribute | description |
 |-----------|-------------|
 | validate  | function to determine form validity. Defaults to only call form.checkvalidity. |
+
+
+Section
+-------
+
+A main section with pre-configured margins, paddings, and widths. If the
+```full``` attribute is specified, the section will feature a full window
+width, white background, additional padding, and automatically wrap all child
+elements in a div.
+
+```html
+<mkt-section full>
+  <p>Full section.</p>
+</mkt-prompt>
+```

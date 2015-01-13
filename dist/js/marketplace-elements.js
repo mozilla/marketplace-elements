@@ -404,6 +404,26 @@
         }),
     });
 
+    document.registerElement('mkt-section', {
+        prototype: Object.create(MktHTMLElement.prototype, {
+            createdCallback: {
+                value: function() {
+                    this.classList.add('mkt-section');
+
+                    if (this.hasAttribute('full')) {
+                        // Wrap everything in a div.
+                        var div = document.createElement('div');
+                        this.appendChild(div);
+
+                        forEach(this.children, function(child) {
+                            div.appendChild(child);
+                        });
+                    }
+                },
+            },
+        }),
+    });
+
     function forEach(arr, fn) {
         // For NodeList.
         return Array.prototype.forEach.call(arr, fn);

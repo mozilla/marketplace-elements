@@ -48,7 +48,7 @@
   background: url("../img/btn_spinner.png") no-repeat center;
   width: 30px;
   height: 18px;
-  margin: 2px 0;
+  margin: 3px 0;
   background: url("../img/btn_spinner_18.png") no-repeat center;
   width: 18px;
   content: "";
@@ -283,5 +283,47 @@
   }
   .mkt-prompt[data-modal] .mkt-prompt-content {
     width: 66.6666666666667%;
+  }
+}
+.mkt-section {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.mkt-section:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.mkt-section[full] {
+  background: #fff;
+  max-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+.mkt-section[full] > div {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px 10px;
+}
+.mkt-section[full] + .mkt-section,
+.mkt-section[full] + .placeholder .mkt-section {
+  margin-top: 10px;
+}
+.placeholder + .placeholder .mkt-section,
+.placeholder + .mkt-section {
+  margin-top: 10px;
+}
+.mkt-section + .mkt-section {
+  margin-top: 10px;
+}
+@media (min-width: 1050px) {
+  .mkt-section {
+    max-width: 1070px;
+  }
+  .mkt-section > div {
+    padding: 30px 0;
+    width: 1070px;
   }
 }
