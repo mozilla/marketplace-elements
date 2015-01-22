@@ -34,6 +34,9 @@
 }
 .mkt-banner-content > span {
   display: inline-block;
+}
+.mkt-banner-content > span,
+.mkt-banner-content > div {
   margin-top: 10px;
   padding: 0;
 }
