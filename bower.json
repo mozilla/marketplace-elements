@@ -5,7 +5,7 @@
   ],
   "dependencies": {
     "document-register-element": "~0.1.6",
-    "marketplace-frontend": "7.1.x"
+    "marketplace-frontend": "~7.2"
   },
   "description": "Custom HTML elements for the Firefox Marketplace",
   "homepage": "https://github.com/mozilla/marketplace-elements",
@@ -22,5 +22,5 @@
     "amd"
   ],
   "name": "marketplace-elements",
-  "version": "0.3.1"
+  "version": "0.3.2"
 }
