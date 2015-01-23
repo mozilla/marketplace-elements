@@ -19,6 +19,17 @@
         };
     })();
 
+    function makeStorage(storage) {
+        return {
+            getItem: function(key) {
+                return JSON.parse(storage.getItem(key));
+            },
+            setItem: function(key, value) {
+                storage.setItem(key, JSON.stringify(value));
+            },
+        };
+    }
+
     // Mock gettext if it doesn't exist globally.
     var gettext = window.gettext || function (str) { return str; };
 
@@ -130,17 +141,26 @@
             },
             rememberDismissal: {
                 get: function () {
-                    return this.dismiss === 'remember';
+                    return this.dismiss === 'remember' ||
+                           this.dismiss === 'session';
                 },
             },
             storage: {
                 get: function () {
-                    return require('storage');
+                    if (this.dismiss === 'remember') {
+                        return makeStorage(localStorage);
+                    } else if (this.dismiss === 'session') {
+                        return makeStorage(sessionStorage);
+                    }
                 },
             },
             storageKey: {
                 get: function () {
-                    return 'hide_' + this.id.replace(/-/g, '_');
+                    if (this.hasAttribute('name')) {
+                        return 'mkt-banner-hide-' + this.getAttribute('name');
+                    } else {
+                        return 'hide_' + this.id.replace(/-/g, '_');
+                    }
                 },
             },
             undismissable: {
