@@ -24,9 +24,5 @@
     "amd"
   ],
   "name": "marketplace-elements",
-  "version": "0.5.1",
-  "resolutions": {
-    "marketplace-constants": "0.4.0",
-    "marketplace-core-modules": "1.6.2"
-  }
+  "version": "0.5.1"
 }
