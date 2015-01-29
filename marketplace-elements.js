@@ -372,7 +372,7 @@
                         if (i === 0 && !btn.hasAttribute('type')) {
                             btn.setAttribute('data-type', 'cancel');
                         } else if (i === 1 && !btn.hasAttribute('type')) {
-                            btn.type = 'submit';
+                            btn.setAttribute('type', 'submit');
                         }
                     });
 
