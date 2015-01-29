@@ -370,7 +370,7 @@
                     // the cancel button. And the second to be the submit button.
                     forEach(this.querySelectorAll('.mkt-prompt-btn-wrap button'), function(btn, i) {
                         if (i === 0 && !btn.hasAttribute('type')) {
-                            btn.type = 'cancel';
+                            btn.setAttribute('data-type', 'cancel');
                         } else if (i === 1 && !btn.hasAttribute('type')) {
                             btn.type = 'submit';
                         }
@@ -385,7 +385,7 @@
                         });
 
                         // Cancel button closes modal.
-                        var cancelButton = this.querySelector('button[type="cancel"]');
+                        var cancelButton = this.querySelector('button[data-type="cancel"]');
                         cancelButton.addEventListener('click', function(e) {
                             e.preventDefault();
                             this.dispatchEvent(MktEvent('mkt-prompt-cancel'));

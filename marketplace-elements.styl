@@ -304,9 +304,9 @@ for $i in (0..3) {
     &:hover {
         cursor: pointer;
     }
-    &[type="cancel"] {
+    &[data-type="cancel"] {
         // Cancel button.
-        display: none;  // Don't show cancel button as a page.
+        display: none;  // Don't show cancel button when as a page.
         background: $action-positive;
 
         &:hover {
@@ -361,7 +361,7 @@ for $i in (0..3) {
         right: 20px;
         width: unquote('calc(100% + 40px)');
     }
-    [type="cancel"] {
+    [data-type="cancel"] {
         display: inline-block;
     }
 }
