@@ -8,7 +8,7 @@
   },
   "description": "Custom HTML elements for the Firefox Marketplace",
   "devDependencies": {
-    "marketplace-frontend": "~7.4"
+    "marketplace-frontend": "~7.5"
   },
   "homepage": "https://github.com/mozilla/marketplace-elements",
   "ignore": [
@@ -24,5 +24,5 @@
     "amd"
   ],
   "name": "marketplace-elements",
-  "version": "0.5.5"
+  "version": "0.6.0"
 }

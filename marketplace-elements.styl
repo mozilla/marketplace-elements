@@ -34,36 +34,29 @@ $font-bold = 500;
         right: 0;
         top: 50%;
     }
-
     .mkt-banner-close:hover {
         color: rgba($greyscale-white, 0.8);
     }
-
     .mkt-banner-close:active {
         color: rgba($greyscale-white, 0.6);
     }
-
     > span {
         display: inline-block;
     }
-
     > span,
     > div {
         margin-top: 10px;
         padding: 0;
     }
-
     a {
-        color: $white;
         font-weight: $font-narrow;
         text-decoration: underline;
     }
-
     > a {
         border-radius: 5px;
-        color: #fff;
+        color: $greyscale-white;
+        font-weight: 400;
         display: inline-block;
-        font-weight: $font-bold;
         margin: 10px;
         padding: 10px;
         text-decoration: none;
@@ -103,14 +96,9 @@ $font-bold = 500;
 }
 
 .mkt-banner-content {
-    font-size: 15px;
-    font-weight: $font-bold;
+    type_body($greyscale-white);
+    font-weight: 400;
     padding: 0 40px;
-
-    small {
-        font-size: 15px;
-        font-weight: $font-bold;
-    }
 }
 
 $banner-colors = $action-success $action-positive $action-wait $action-error;
