@@ -233,11 +233,17 @@
             },
             value: {
                 get: function () {
+                    console.log('getting value');
                     return this.select.value;
                 },
                 set: function (value) {
+                    console.log('setting value to ' + value);
                     if (this.select.value !== value) {
-                        this.select.value = value;
+                        console.log('foo' + this.select.options);
+                        forEach(this.select.option, function(option) {
+                            console.log(option.selected);
+                            option.selected = option.value === value;
+                        });
                         this.selectButton(this.buttons[this.select.selectedIndex]);
                     }
                 },
@@ -464,4 +470,6 @@
         });
         return data;
     }
+
+    window.mktElementsLoaded = true;
 })();
