@@ -1,15 +1,5 @@
-(function() {
+define('elements/mkt-segmented', ['elements/utils'], function(u) {
     'use strict';
-
-    function map(arr, fn) {
-        // For NodeList.
-        return Array.prototype.map.call(arr, fn);
-    }
-
-    function forEach(arr, fn) {
-        // For NodeList.
-        return Array.prototype.forEach.call(arr, fn);
-    }
 
     class MktSegmented extends HTMLElement {
         createdCallback() {
@@ -18,7 +8,7 @@
             this.select.classList.add('mkt-segmented-select');
             this.classList.add('mkt-segmented');
 
-            this.buttons = map(this.select.options, function (option, i) {
+            this.buttons = u.map(this.select.options, function (option, i) {
                 var button = document.createElement('button');
                 button.index = i;
                 button.classList.add('mkt-segmented-button');
@@ -59,4 +49,4 @@
     }
 
     document.registerElement('mkt-segmented', MktSegmented);
-})();
+});
