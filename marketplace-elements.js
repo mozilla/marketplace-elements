@@ -316,6 +316,17 @@
                     root.tabs = tabs;
                     var current = root.getAttribute('current');
 
+                    // If a child element with a `data-set-tab` attribute is
+                    // clicked then set the tab and prevent the event's
+                    // default behaviour.
+                    root.addEventListener('click', function(e) {
+                        var targetTab = e.target.getAttribute('data-set-tab');
+                        if (targetTab) {
+                            e.preventDefault();
+                            root.setAttribute('current', targetTab);
+                        }
+                    });
+
                     root.classList.add('mkt-tabs');
                     forEach(tabs, function(tab) {
                         tab.classList.add('mkt-tab');
