@@ -191,6 +191,14 @@ for $i in (0..3) {
     padding: 5px 0;
     text-transform: uppercase;
 
+    &:first-of-type {
+        margin-left: 0;
+    }
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+
     &[selected] {
         border-color: $action-positive;
         color: $action-positive;
