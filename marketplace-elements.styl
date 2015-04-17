@@ -347,6 +347,11 @@ for $i in (0..3) {
         position: relative;
         right: 20px;
         width: unquote('calc(100% + 40px)');
+
+        +rtl() {
+            left: 20px;
+            right: inherit;
+        }
     }
     [data-type="cancel"] {
         display: inline-block;
