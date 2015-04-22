@@ -86,8 +86,14 @@
             },
             createdCallback: {
                 value: function () {
+                    var root = this;
+
                     MktHTMLElement.prototype.createdCallback.call(this);
                     this.classList.add('mkt-banner');
+
+                    document.addEventListener('saferesize', function () {
+                        root.setMinHeight();
+                    });
 
                     if (!this.hasAttribute('theme')) {
                         this.setAttribute('theme', 'success');
@@ -124,6 +130,8 @@
 
                     this.innerHTML = '';
                     this.appendChild(content);
+
+                    root.setMinHeight();
                 },
             },
             dismissed: {
@@ -136,13 +144,22 @@
                     if (this.rememberDismissal) {
                         this.storage.setItem(this.storageKey, true);
                     }
-                    this.parentNode.removeChild(this);
+                    this.addEventListener('transitionend', function() {
+                        this.parentNode.removeChild(this);
+                    });
+                    this.style.maxHeight = 0;
                 },
             },
             rememberDismissal: {
                 get: function () {
                     return this.dismiss === 'remember' ||
                            this.dismiss === 'session';
+                },
+            },
+            setMinHeight: {
+                value: function () {
+                    this.style.maxHeight = null;
+                    this.style.maxHeight = this.clientHeight + 'px';
                 },
             },
             storage: {
