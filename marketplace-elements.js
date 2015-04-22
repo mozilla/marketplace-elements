@@ -89,6 +89,10 @@
                     MktHTMLElement.prototype.createdCallback.call(this);
                     this.classList.add('mkt-banner');
 
+                    document.addEventListener('saferesize', function () {
+                        this.setMinHeight();
+                    }.bind(this));
+
                     if (!this.hasAttribute('theme')) {
                         this.setAttribute('theme', 'success');
                     }
@@ -103,8 +107,6 @@
             },
             html: {
                 value: function (html) {
-                    var root = this;
-
                     var content = document.createElement('div');
                     content.classList.add('mkt-banner-content');
                     content.innerHTML = html;
@@ -117,13 +119,14 @@
                         closeButton.title = gettext('Close');
                         closeButton.addEventListener('click', function (e) {
                             e.preventDefault();
-                            root.dismissBanner();
-                        });
+                            this.dismissBanner();
+                        }.bind(this));
                         content.appendChild(closeButton);
                     }
 
                     this.innerHTML = '';
                     this.appendChild(content);
+                    this.setMinHeight();
                 },
             },
             dismissed: {
@@ -136,13 +139,22 @@
                     if (this.rememberDismissal) {
                         this.storage.setItem(this.storageKey, true);
                     }
-                    this.parentNode.removeChild(this);
+                    this.addEventListener('transitionend', function() {
+                        this.parentNode.removeChild(this);
+                    });
+                    this.style.maxHeight = 0;
                 },
             },
             rememberDismissal: {
                 get: function () {
                     return this.dismiss === 'remember' ||
                            this.dismiss === 'session';
+                },
+            },
+            setMinHeight: {
+                value: function () {
+                    this.style.maxHeight = null;
+                    this.style.maxHeight = this.clientHeight + 'px';
                 },
             },
             storage: {

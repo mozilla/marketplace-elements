@@ -14,6 +14,7 @@ $font-bold = 500;
     line-height: 1.3;
     overflow: hidden;
     position: relative;
+    transition: max-height 350ms;
 }
 
 .mkt-banner-content {
@@ -29,10 +30,17 @@ $font-bold = 500;
         font-weight: $font-narrow;
         line-height: 0;
         margin: 0;
-        padding: 0 10px 0 0;
+        padding: 0;
         position: absolute;
-        right: 0;
         top: 50%;
+        +ltr() {
+            right: 0;
+            padding-right: 10px;
+        }
+        +rtl() {
+            left: 0;
+            padding-left: 10px;
+        }
     }
     .mkt-banner-close:hover {
         color: rgba($greyscale-white, 0.8);
