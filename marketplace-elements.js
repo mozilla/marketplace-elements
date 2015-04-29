@@ -140,8 +140,11 @@
                         this.storage.setItem(this.storageKey, true);
                     }
                     this.addEventListener('transitionend', function() {
-                        this.parentNode.removeChild(this);
-                    });
+                        // This could get called more than once.
+                        if (this.parentNode) {
+                            this.parentNode.removeChild(this);
+                        }
+                    }.bind(this));
                     this.style.maxHeight = 0;
                 },
             },
