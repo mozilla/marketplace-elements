@@ -1,4 +1,5 @@
 {
+  "version": "0.7.1",
   "authors": [
     "Mozilla",
     "Mark Striemer"
@@ -23,6 +24,5 @@
   "moduleType": [
     "amd"
   ],
-  "name": "marketplace-elements",
-  "version": "0.7.0"
+  "name": "marketplace-elements"
 }
