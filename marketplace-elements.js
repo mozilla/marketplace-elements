@@ -98,7 +98,7 @@
                     }
 
                     if (this.rememberDismissal && this.dismissed) {
-                        this.dismissBanner();
+                        this.dismissBanner({immediate: true});
                     }
 
                     // Format the initial HTML.
@@ -135,17 +135,26 @@
                 },
             },
             dismissBanner: {
-                value: function () {
+                value: function (opts) {
+                    // opts.immediate (bool)
+                    //     dismiss the banner without a transition.
+                    opts = opts || {};
                     if (this.rememberDismissal) {
                         this.storage.setItem(this.storageKey, true);
                     }
-                    this.addEventListener('transitionend', function() {
+                    var removeBanner = function() {
                         // This could get called more than once.
                         if (this.parentNode) {
                             this.parentNode.removeChild(this);
                         }
-                    }.bind(this));
-                    this.style.maxHeight = 0;
+                    }.bind(this);
+                    if (opts.immediate) {
+                        removeBanner();
+                    } else {
+                        setTimeout(removeBanner, 500);
+                        this.addEventListener('transitionend', removeBanner);
+                        this.style.maxHeight = 0;
+                    }
                 },
             },
             rememberDismissal: {

@@ -1,0 +1,20 @@
+sudo: false
+branches:
+  only:
+  - master
+notifications:
+  email: false
+language: node_js
+node_js:
+- '0.10'
+before_script:
+- npm install
+- bower install
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+script:
+- karma start --single-run
+cache:
+  directories:
+  - node_modules
+  - bower_components
