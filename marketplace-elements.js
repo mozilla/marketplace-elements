@@ -415,6 +415,15 @@
                             this.dispatchEvent(MktEvent('mkt-prompt-cancel'));
                             root.dismissModal();
                         });
+
+                        // Closes modal on esc key press.
+                        document.addEventListener('keyup', function(e) {
+                            var key = e.which || e.keyCode;
+                            if (key === 27) {
+                                this.dispatchEvent(MktEvent('mkt-prompt-cancel'));
+                                root.dismissModal();
+                            }
+                        });
                     }
 
                     // Submit button triggers event with data.
