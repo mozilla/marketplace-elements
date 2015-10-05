@@ -126,7 +126,9 @@
 
                     this.innerHTML = '';
                     this.appendChild(content);
-                    this.setMinHeight();
+                    setTimeout(function() {
+                        this.setMinHeight();
+                    }.bind(this), 20);
                 },
             },
             dismissed: {
