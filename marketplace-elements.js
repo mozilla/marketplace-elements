@@ -150,6 +150,7 @@
                             this.parentNode.removeChild(this);
                         }
                     }.bind(this);
+                    this.dispatchEvent(new MktEvent('dismiss-banner'));
                     if (opts.immediate) {
                         removeBanner();
                     } else {
